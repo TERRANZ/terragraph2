@@ -11,10 +11,12 @@ SOURCES += main.cpp \
     graphlib/basegraphitem.cpp \
     graphlib/arrow.cpp \
     graphlib/vertex.cpp \
-    graphlib/box.cpp
+    graphlib/box.cpp \
+    graphlib/geometry.cpp
 HEADERS += mainwindow.h \
     graphlib/basegraphitem.h \
     graphlib/arrow.h \
     graphlib/vertex.h \
-    graphlib/box.h
+    graphlib/box.h \
+    graphlib/geometry.h
 FORMS += mainwindow.ui
