@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include "graphlib/arrow.h"
+#include "graphlib/vertex.h"
 
 namespace Ui {
     class MainWindow;
@@ -18,6 +22,10 @@ protected:
 
 private:
     Ui::MainWindow *ui;
+    QList<Vertex*> l_verts;
+    QList<Arrow*> l_arrows;
+    QGraphicsScene *m_scn;
+    QGraphicsView *m_view;
 };
 
 #endif // MAINWINDOW_H

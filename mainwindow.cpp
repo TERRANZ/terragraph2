@@ -6,7 +6,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QGraphicsScene* scn = new QGraphicsScene(ui->graphicsView);
+    m_scn = new QGraphicsScene(ui->centralWidget);
+    m_view = new QGraphicsView(m_scn,ui->centralWidget);
+    ui->gridLayout->addWidget(m_view);
+    Vertex *newver = new Vertex();
+    newver->setRect(0,0,30,30);
+    m_scn->addItem(newver);
 }
 
 MainWindow::~MainWindow()
