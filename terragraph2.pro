@@ -8,15 +8,11 @@ TARGET = terragraph2
 TEMPLATE = app
 SOURCES += main.cpp \
     mainwindow.cpp \
-    graphlib/basegraphitem.cpp \
-    graphlib/arrow.cpp \
     graphlib/vertex.cpp \
-    graphlib/box.cpp \
+    graphlib/arrow.cpp \
     graphlib/geometry.cpp
 HEADERS += mainwindow.h \
-    graphlib/basegraphitem.h \
-    graphlib/arrow.h \
     graphlib/vertex.h \
-    graphlib/box.h \
+    graphlib/arrow.h \
     graphlib/geometry.h
 FORMS += mainwindow.ui
