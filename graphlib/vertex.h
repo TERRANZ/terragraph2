@@ -1,13 +1,14 @@
 #ifndef BASEGRAPHITEM_H
 #define BASEGRAPHITEM_H
 
-#include <QGraphicsItem>
+#include <QGraphicsEllipseItem>
+#include <QGraphicsTextItem>
 #include "geometry.h"
 
-class BaseGraphItem : public QGraphicsItem
+class Vertex : public QGraphicsEllipseItem
 {
 public:
-    BaseGraphItem(
+    Vertex(
             QString id = "", QString rem = "", QString text = "", QString next = "",
             int type = 0, int send_or_recv = 0
                                                  );
@@ -27,6 +28,7 @@ public:
 private:
     QString m_id,m_rem,m_text,m_next;
     int m_type,m_send_or_recv;
+    QGraphicsTextItem* m_graphText;
 
 };
 
