@@ -23,14 +23,15 @@ public:
         CMD_ARR_SETEND   = 10,
         CMD_ARR_SETETXT  = 11,
     };
-    Command();
-
+    virtual void Do(){};
+    virtual void Undo(){};
 private:
     QPointF m_newpos,m_oldpos;
     QString m_newtext,m_oldtext;
     Vertex* m_newver;
     Arrow*  m_newarr;
     int     m_newtype,m_oldtype;
+    int     m_command;
 };
 
 #endif // COMMAND_H

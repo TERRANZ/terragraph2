@@ -30,6 +30,7 @@ private:
     QList<Arrow*> l_arrows;
     QGraphicsScene *m_scn;
     QGraphicsView *m_view;
+    QList<Command*> l_commands;
 };
 
 #endif // MAINWINDOW_H

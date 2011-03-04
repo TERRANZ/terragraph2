@@ -13,7 +13,6 @@ SOURCES += main.cpp \
     graphlib/geometry.cpp \
     vertattrsdlg.cpp \
     dom.cpp \
-    command.cpp \
     xmllib/xmlbackend.cpp
 HEADERS += mainwindow.h \
     graphlib/vertex.h \
