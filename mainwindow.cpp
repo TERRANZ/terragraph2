@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_state = MainWindow::WModeIdle;
     m_scn = new QGraphicsScene(ui->centralWidget);
     m_view = new QGraphicsView(m_scn,ui->centralWidget);
-    ui->gridLayout->addWidget(m_view);
+    ui->verticalLayout->addWidget(m_view,Qt::AlignTop);
     m_scn->setSceneRect(0,0,250,250);
     connect(m_scn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
 }
