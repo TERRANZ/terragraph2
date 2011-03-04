@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     newver->setText("txt1");
     Vertex *newver2 = new Vertex(0,m_scn);
     newver2->setText("txt2");
+    Arrow* arr = new Arrow(newver,newver2,0,m_scn);
+    m_scn->addItem(arr);
 }
 
 MainWindow::~MainWindow()

@@ -75,7 +75,7 @@ void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
     QPointF p3,p4;
     p3 = p2 + (p1-p2)*enddiff/centerLine.length();
     p4 = p1 + (p2-p1)*startdiff/centerLine.length();
-    Line.setPoints(p4,p3);
+    Line.setPoints(p3,p4);
 
     setLine(Line);
 
