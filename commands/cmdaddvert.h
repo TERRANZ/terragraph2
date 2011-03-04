@@ -8,7 +8,7 @@
 class CmdAddVert : public Command
 {
 public:
-    CmdAddVert();
+    CmdAddVert(Vertex *newver);
 private:
     Vertex* m_newver;
 };

@@ -1,5 +1,6 @@
 #include "cmdaddvert.h"
 
-CmdAddVert::CmdAddVert()
+CmdAddVert::CmdAddVert(Vertex* newver)
 {
+    m_newver = newver;
 }

@@ -6,16 +6,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    m_state = MainWindow::WModeIdle;
     m_scn = new QGraphicsScene(ui->centralWidget);
     m_view = new QGraphicsView(m_scn,ui->centralWidget);
     ui->gridLayout->addWidget(m_view);
     m_scn->setSceneRect(0,0,250,250);
-    Vertex *newver = new Vertex(0,m_scn);
-    newver->setText("txt1");
-    Vertex *newver2 = new Vertex(0,m_scn);
-    newver2->setText("txt2");
-    Arrow* arr = new Arrow(newver,newver2,0,m_scn);
-    m_scn->addItem(arr);
+    connect(m_scn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
 }
 
 MainWindow::~MainWindow()
@@ -34,3 +30,31 @@ void MainWindow::changeEvent(QEvent *e)
         break;
     }
 }
+
+void MainWindow::SceneSelection()
+{
+
+}
+
+void MainWindow::AddVert()
+{
+    Vertex* newvert = new Vertex(0,m_scn);
+    CmdAddVert* cmd = new CmdAddVert(newvert);
+    l_commands.append(cmd);
+}
+
+void MainWindow::AddArr()
+{
+
+}
+
+void MainWindow::Del()
+{
+
+}
+
+void MainWindow::Exit()
+{
+
+}
+

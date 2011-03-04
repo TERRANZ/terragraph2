@@ -122,5 +122,80 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actAddVert</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>AddVert()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actAddArr</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>AddArr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actDel</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>Del()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ActExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>Exit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>299</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>AddVert()</slot>
+  <slot>AddArr()</slot>
+  <slot>Del()</slot>
+  <slot>OpenFile()</slot>
+  <slot>SaveFile()</slot>
+  <slot>Exit()</slot>
+  <slot>SaveAs()</slot>
+  <slot>About()</slot>
+ </slots>
 </ui>
