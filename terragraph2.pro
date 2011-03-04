@@ -13,7 +13,18 @@ SOURCES += main.cpp \
     graphlib/geometry.cpp \
     vertattrsdlg.cpp \
     dom.cpp \
-    xmllib/xmlbackend.cpp
+    xmllib/xmlbackend.cpp \
+    commands/cmdaddvert.cpp \
+    commands/cmdaddarr.cpp \
+    commands/cmddelvert.cpp \
+    commands/cmddelarr.cpp \
+    commands/cmdvertsettext.cpp \
+    commands/cmdvertsetid.cpp \
+    commands/cmdvertsetpos.cpp \
+    commands/cmdvertsettype.cpp \
+    commands/cmdvertsetsendorrecv.cpp \
+    commands/cmdarrsetstartend.cpp \
+    commands/cmdarrsettext.cpp
 HEADERS += mainwindow.h \
     graphlib/vertex.h \
     graphlib/arrow.h \
@@ -22,6 +33,17 @@ HEADERS += mainwindow.h \
     dom.h \
     dombackend.h \
     command.h \
-    xmllib/xmlbackend.h
+    xmllib/xmlbackend.h \
+    commands/cmdaddvert.h \
+    commands/cmdaddarr.h \
+    commands/cmddelvert.h \
+    commands/cmddelarr.h \
+    commands/cmdvertsettext.h \
+    commands/cmdvertsetid.h \
+    commands/cmdvertsetpos.h \
+    commands/cmdvertsettype.h \
+    commands/cmdvertsetsendorrecv.h \
+    commands/cmdarrsetstartend.h \
+    commands/cmdarrsettext.h
 FORMS += mainwindow.ui \
     vertattrsdlg.ui
