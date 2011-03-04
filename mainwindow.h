@@ -6,6 +6,10 @@
 #include <QGraphicsView>
 #include "graphlib/arrow.h"
 #include "graphlib/vertex.h"
+#include "command.h"
+#include "dom.h"
+#include "dombackend.h"
+#include "xmllib/xmlbackend.h"
 
 namespace Ui {
     class MainWindow;

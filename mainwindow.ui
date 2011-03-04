@@ -25,6 +25,35 @@
      <height>25</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="actOpen"/>
+    <addaction name="actSave"/>
+    <addaction name="ActSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="ActExit"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Инструменты</string>
+    </property>
+    <addaction name="actAddVert"/>
+    <addaction name="actAddArr"/>
+    <addaction name="actDel"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>Справка</string>
+    </property>
+    <addaction name="actAbout"/>
+    <addaction name="actAbutUs"/>
+    <addaction name="ActAboutQt"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_3"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -35,6 +64,61 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actOpen">
+   <property name="text">
+    <string>Открыть...</string>
+   </property>
+  </action>
+  <action name="actSave">
+   <property name="text">
+    <string>Сохранить</string>
+   </property>
+  </action>
+  <action name="ActSaveAs">
+   <property name="text">
+    <string>Сохранить как...</string>
+   </property>
+  </action>
+  <action name="action_4">
+   <property name="text">
+    <string>-</string>
+   </property>
+  </action>
+  <action name="ActExit">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="actAddVert">
+   <property name="text">
+    <string>Добавить вершину</string>
+   </property>
+  </action>
+  <action name="actAddArr">
+   <property name="text">
+    <string>Добавить стрелку</string>
+   </property>
+  </action>
+  <action name="actDel">
+   <property name="text">
+    <string>Удалить</string>
+   </property>
+  </action>
+  <action name="actAbout">
+   <property name="text">
+    <string>О программе...</string>
+   </property>
+  </action>
+  <action name="actAbutUs">
+   <property name="text">
+    <string>О создателе...</string>
+   </property>
+  </action>
+  <action name="ActAboutQt">
+   <property name="text">
+    <string>О Qt...</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
