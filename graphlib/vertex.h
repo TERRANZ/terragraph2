@@ -3,15 +3,13 @@
 
 #include <QGraphicsEllipseItem>
 #include <QGraphicsTextItem>
+#include <QGraphicsScene>
 #include "geometry.h"
 
 class Vertex : public QGraphicsEllipseItem
 {
 public:
-    Vertex(
-            QString id = "", QString rem = "", QString text = "", QString next = "",
-            int type = 0, int send_or_recv = 0
-                                                 );
+    Vertex(QGraphicsItem *parent,QGraphicsScene *scn);
 
     QString id() {return m_id;};
     QString rem() {return m_rem;};
@@ -29,6 +27,7 @@ private:
     QString m_id,m_rem,m_text,m_next;
     int m_type,m_send_or_recv;
     QGraphicsTextItem* m_graphText;
+    QGraphicsScene* m_scn;
 
 };
 

@@ -1,15 +1,20 @@
 #include "vertex.h"
 
-Vertex::Vertex(
-        QString id, QString rem, QString text, QString next,
-        int type, int send_or_recv)
+Vertex::Vertex(QGraphicsItem *parent,QGraphicsScene *scn)
+    :QGraphicsEllipseItem(parent,scn)
 {
-    setId(id);
-    setRem(rem);
-    setText(text);
-    setNext(next);
-    setType(type);
-    setSendOrRecv(send_or_recv);
+    m_scn = scn;
+    m_graphText = new QGraphicsTextItem(this,m_scn);
+    m_graphText->setPos(0,7);
+    setId("");
+    setRem("");
+    setText("");
+    setNext("");
+    setType(0);
+    setSendOrRecv(1);
+    this->setRect(0,0,30,30);
+    this->setFlag(QGraphicsItem::ItemIsMovable);
+    this->setFlag(QGraphicsItem::ItemIsSelectable);
 }
 
 void Vertex::setId(QString id)
@@ -25,6 +30,7 @@ void Vertex::setRem(QString rem)
 void Vertex::setText(QString text)
 {
     m_text = text;
+    m_graphText->setPlainText(text);
 }
 
 void Vertex::setNext(QString next)

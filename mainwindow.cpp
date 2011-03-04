@@ -9,9 +9,11 @@ MainWindow::MainWindow(QWidget *parent) :
     m_scn = new QGraphicsScene(ui->centralWidget);
     m_view = new QGraphicsView(m_scn,ui->centralWidget);
     ui->gridLayout->addWidget(m_view);
-    Vertex *newver = new Vertex();
-    newver->setRect(0,0,30,30);
-    m_scn->addItem(newver);
+    m_scn->setSceneRect(0,0,250,250);
+    Vertex *newver = new Vertex(0,m_scn);
+    newver->setText("txt1");
+    Vertex *newver2 = new Vertex(0,m_scn);
+    newver2->setText("txt2");
 }
 
 MainWindow::~MainWindow()
