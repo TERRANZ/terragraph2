@@ -1,6 +1,12 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include <QPointF>
+#include "graphlib/vertex.h"
+#include "graphlib/arrow.h"
+#include "dom.h"
+#include <QString>
+
 class Command
 {
 public:
@@ -20,8 +26,11 @@ public:
     Command();
 
 private:
-
-
+    QPointF m_newpos,m_oldpos;
+    QString m_newtext,m_oldtext;
+    Vertex* m_newver;
+    Arrow*  m_newarr;
+    int     m_newtype,m_oldtype;
 };
 
 #endif // COMMAND_H
