@@ -24,7 +24,8 @@ SOURCES += main.cpp \
     commands/cmdvertsettype.cpp \
     commands/cmdvertsetsendorrecv.cpp \
     commands/cmdarrsetstartend.cpp \
-    commands/cmdarrsettext.cpp
+    commands/cmdarrsettext.cpp \
+    graphlib/graphicscene.cpp
 HEADERS += mainwindow.h \
     graphlib/vertex.h \
     graphlib/arrow.h \
@@ -44,6 +45,7 @@ HEADERS += mainwindow.h \
     commands/cmdvertsettype.h \
     commands/cmdvertsetsendorrecv.h \
     commands/cmdarrsetstartend.h \
-    commands/cmdarrsettext.h
+    commands/cmdarrsettext.h \
+    graphlib/graphicscene.h
 FORMS += mainwindow.ui \
     vertattrsdlg.ui

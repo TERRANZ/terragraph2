@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include "graphlib/arrow.h"
 #include "graphlib/vertex.h"
+#include "graphlib/graphicscene.h"
 #include "command.h"
 #include "dom.h"
 #include "dombackend.h"
@@ -46,13 +47,14 @@ private:
     Ui::MainWindow *ui;
     QList<Vertex*> l_verts;
     QList<Arrow*> l_arrows;
-    QGraphicsScene *m_scn;
+    GraphicScene *m_scn;
     QGraphicsView *m_view;
     QList<Command*> l_commands;
     int m_state;
 
 private slots:
     void SceneSelection();
+    void SceneMousePressed(QPointF pos);
     void AddVert();
     void AddArr();
     void Del();
