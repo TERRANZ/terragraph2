@@ -43,8 +43,10 @@ void MainWindow::SceneMouseReleased(QPointF pos)
     {
     case WModeAddVer:
         {
-            Vertex* newvert = new Vertex(0,m_scn);
-            CmdAddVert* cmdadd = new CmdAddVert(newvert);
+            Vertex* newvert = new Vertex(0,0);
+            CmdAddVert* cmdadd = new CmdAddVert(newvert,m_scn);
+            cmdadd->Do();
+            l_verts.append(newvert);
             l_commands.append(cmdadd);
             ui->textEdit->insertPlainText("Added vert\n");
             CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
