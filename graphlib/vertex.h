@@ -23,12 +23,12 @@ public:
     void setNext(QString next);
     void setType(int type);
     void setSendOrRecv(int send_or_recv);
+
 private:
     QString m_id,m_rem,m_text,m_next;
     int m_type,m_send_or_recv;
     QGraphicsTextItem* m_graphText;
     QGraphicsScene* m_scn;
-
 };
 
 #endif // BASEGRAPHITEM_H

@@ -4,12 +4,14 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QMenu>
 #include "graphlib/arrow.h"
 #include "graphlib/vertex.h"
 #include "graphlib/graphicscene.h"
 #include "command.h"
 #include "dom.h"
 #include "dombackend.h"
+#include "vertattrsdlg.h"
 #include "xmllib/xmlbackend.h"
 #include "commands/cmdaddarr.h"
 #include "commands/cmdaddvert.h"
@@ -44,21 +46,30 @@ protected:
     void changeEvent(QEvent *e);
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow* ui;
     QList<Vertex*> l_verts;
     QList<Arrow*> l_arrows;
-    GraphicScene *m_scn;
-    QGraphicsView *m_view;
+    GraphicScene* m_scn;
+    QGraphicsView* m_view;
     QList<Command*> l_commands;
     int m_state;
+    QMenu* m_vertMenu;
+    QAction* m_vertMenuInfoAction;
+    QAction* m_vertMenuDeleteAction;
+    VertAttrsDlg* vertattrdlg;
 
 private slots:
     void SceneSelection();
     void SceneMouseReleased(QPointF pos);
+    void SceneContextMenu(QPointF pos);
+
     void AddVert();
     void AddArr();
     void Del();
     void Exit();
+
+    void vertMenuInfo();
+    void vertMenuDelete();
 };
 
 #endif // MAINWINDOW_H

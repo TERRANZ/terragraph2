@@ -13,6 +13,19 @@ MainWindow::MainWindow(QWidget *parent) :
     m_scn->setSceneRect(0,0,250,250);
     connect(m_scn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
     connect(m_scn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
+    connect(m_scn,SIGNAL(mouseContextMenuSignal(QPointF)),this,SLOT(SceneContextMenu(QPointF)));
+    m_vertMenu = new QMenu(m_view);
+    m_vertMenuInfoAction = new QAction(this);
+    m_vertMenuDeleteAction = new QAction(this);
+
+    m_vertMenuInfoAction->setText(trUtf8("Инфо"));
+    m_vertMenuInfoAction->setIcon(QIcon(":/icons/info"));
+    m_vertMenuDeleteAction->setText(trUtf8("Удалить"));
+    m_vertMenuDeleteAction->setIcon(QIcon(":/icons/delete"));
+    m_vertMenu->addAction(m_vertMenuInfoAction);
+    m_vertMenu->addAction(m_vertMenuDeleteAction);
+    ui->menu_2->addAction(m_vertMenuInfoAction);
+    connect(m_vertMenuInfoAction,SIGNAL(triggered()),this,SLOT(vertMenuInfo()));
 }
 
 MainWindow::~MainWindow()
@@ -71,6 +84,11 @@ void MainWindow::SceneMouseReleased(QPointF pos)
     }
 }
 
+void MainWindow::SceneContextMenu(QPointF pos)
+{
+   // m_vertMenu->exec(pos,m_vertMenuInfoAction);
+}
+
 void MainWindow::AddVert()
 {
     m_state = WModeAddVer;
@@ -91,3 +109,13 @@ void MainWindow::Exit()
 
 }
 
+void MainWindow::vertMenuInfo()
+{
+    vertattrdlg = new VertAttrsDlg(this);
+    vertattrdlg->show();
+}
+
+void MainWindow::vertMenuDelete()
+{
+
+}

@@ -24,3 +24,8 @@ void VertAttrsDlg::changeEvent(QEvent *e)
         break;
     }
 }
+
+void VertAttrsDlg::load(Vertex *v)
+{
+
+}

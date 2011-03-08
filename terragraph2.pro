@@ -49,3 +49,4 @@ HEADERS += mainwindow.h \
     graphlib/graphicscene.h
 FORMS += mainwindow.ui \
     vertattrsdlg.ui
+RESOURCES += icons.qrc

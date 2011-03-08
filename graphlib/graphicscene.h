@@ -12,10 +12,12 @@ public:
 
 signals:
     void mouseReleaseSignal(QPointF pos);
+    void mouseContextMenuSignal(QPointF pos);
 public slots:
 
 protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 
 };
 
