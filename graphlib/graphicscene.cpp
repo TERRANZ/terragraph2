@@ -8,5 +8,5 @@ GraphicScene::GraphicScene(QObject *parent) :
 void GraphicScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
     QGraphicsScene::mouseReleaseEvent(event);
-    emit mouseReleaseSignal(event->pos());
+    emit mouseReleaseSignal(event->scenePos());
 }

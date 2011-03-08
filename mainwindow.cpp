@@ -47,9 +47,9 @@ void MainWindow::SceneMouseReleased(QPointF pos)
             CmdAddVert* cmdadd = new CmdAddVert(newvert);
             l_commands.append(cmdadd);
             ui->textEdit->insertPlainText("Added vert\n");
-//            CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
-//            l_commands.append(cmdsetpos);
-//            ui->textEdit->insertPlainText("Set Pos\n");
+            CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
+            l_commands.append(cmdsetpos);
+            ui->textEdit->insertPlainText("Set Pos\n");
             m_state = WModeIdle;
         }
         break;
