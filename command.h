@@ -19,9 +19,11 @@ public:
     };
     virtual void Do(){};
     virtual void Undo(){};
+    void setCmd(int cmd) {m_command = cmd;};
+    int  cmd() {return m_command;};
 
 private:
-    int     m_command;
+    int m_command;
 };
 
 #endif // COMMAND_H

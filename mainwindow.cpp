@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_view = new QGraphicsView(m_scn,ui->centralWidget);
     ui->verticalLayout->addWidget(m_view,Qt::AlignTop);
     m_scn->setSceneRect(0,0,250,250);
-    connect(m_scn,SIGNAL(mousePressSignal(QPointF)),this,SLOT(SceneMousePressed(QPointF)));
+    connect(m_scn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
     connect(m_scn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
 }
 
@@ -37,16 +37,19 @@ void MainWindow::SceneSelection()
 
 }
 
-void MainWindow::SceneMousePressed(QPointF pos)
+void MainWindow::SceneMouseReleased(QPointF pos)
 {
     switch (m_state)
     {
     case WModeAddVer:
         {
             Vertex* newvert = new Vertex(0,m_scn);
-            CmdAddVert* cmd = new CmdAddVert(newvert);
-            l_commands.append(cmd);
+            CmdAddVert* cmdadd = new CmdAddVert(newvert);
+            l_commands.append(cmdadd);
             ui->textEdit->insertPlainText("Added vert\n");
+//            CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
+//            l_commands.append(cmdsetpos);
+//            ui->textEdit->insertPlainText("Set Pos\n");
             m_state = WModeIdle;
         }
         break;

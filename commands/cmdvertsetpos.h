@@ -8,7 +8,7 @@
 class CmdVertSetPos : public Command
 {
 public:
-    CmdVertSetPos();
+    CmdVertSetPos(Vertex *v,QPointF newpos);
 private:
     QPointF m_newpos,m_oldpos;
 };

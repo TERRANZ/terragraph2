@@ -11,11 +11,11 @@ public:
     explicit GraphicScene(QObject *parent = 0);
 
 signals:
-    void mousePressSignal(QPointF pos);
+    void mouseReleaseSignal(QPointF pos);
 public slots:
 
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 };
 

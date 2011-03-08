@@ -54,7 +54,7 @@ private:
 
 private slots:
     void SceneSelection();
-    void SceneMousePressed(QPointF pos);
+    void SceneMouseReleased(QPointF pos);
     void AddVert();
     void AddArr();
     void Del();
