@@ -10,7 +10,7 @@ class CmdVertSetPos : public Command
 public:
     CmdVertSetPos(Vertex *v,QPointF newpos);
     void Do();
-    void Undo();
+    void UnDo();
 private:
     QPointF m_newpos,m_oldpos;
     Vertex* m_vert;

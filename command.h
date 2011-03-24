@@ -18,7 +18,7 @@ public:
         CMD_ARR_SETETXT  = 11,
     };
     virtual void Do(){};
-    virtual void Undo(){};
+    virtual void UnDo(){};
     void setCmd(int cmd) {m_command = cmd;};
     int  cmd() {return m_command;};
 

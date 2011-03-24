@@ -13,7 +13,7 @@ void CmdVertSetPos::Do()
     m_vert->setPos(m_newpos);
 }
 
-void CmdVertSetPos::Undo()
+void CmdVertSetPos::UnDo()
 {
     m_vert->setPos(m_oldpos);
 }

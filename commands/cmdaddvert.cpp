@@ -12,7 +12,7 @@ void CmdAddVert::Do()
     m_scn->addItem(m_newver);
 }
 
-void CmdAddVert::Undo()
+void CmdAddVert::UnDo()
 {
     m_scn->removeItem(m_newver);
 }

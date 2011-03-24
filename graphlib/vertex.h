@@ -15,13 +15,13 @@ public:
     QString rem() {return m_rem;};
     QString text() {return m_text;};
     QString next() {return m_next;};
-    int     type() {return m_type;};
+    int     vtype() {return m_type;};
     int     send_or_recv() {return m_send_or_recv;};
     void setId(QString id);
     void setRem(QString rem);
     void setText(QString text);
     void setNext(QString next);
-    void setType(int type);
+    void setType(int vtype);
     void setSendOrRecv(int send_or_recv);
 
 private:

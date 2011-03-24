@@ -71,12 +71,24 @@ void MainWindow::SceneMouseReleased(QPointF pos)
         break;
     case WModeAddArrowP1:
         {
-
+            m_curr = m_scn->selectedItems().first();
+            m_last = m_curr;
+            m_curr->setOpacity(0.25);
+            m_state = WModeAddArrowP2;
+            ui->textEdit->insertPlainText("Adding arrow, selected first item\n");
         }
         break;
     case WModeAddArrowP2:
         {
-
+            m_curr = m_scn->selectedItems().first();
+            Arrow * newarr = new Arrow(m_last,m_curr);
+            CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
+            cmd->Do();
+            l_arrows.append(newarr);
+            l_commands.append(cmd);
+            m_state = WModeIdle;
+            m_last->setOpacity(1);
+            ui->textEdit->insertPlainText("Adding arrow, selected second item\n");
         }
         break;
     default:
@@ -96,7 +108,7 @@ void MainWindow::AddVert()
 
 void MainWindow::AddArr()
 {
-
+    m_state = WModeAddArrowP1;
 }
 
 void MainWindow::Del()
