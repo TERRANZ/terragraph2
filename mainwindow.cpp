@@ -2,8 +2,8 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-        QMainWindow(parent),
-        ui(new Ui::MainWindow)
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     m_state = MainWindow::WModeIdle;
@@ -55,21 +55,23 @@ void MainWindow::SceneMouseReleased(QPointF pos)
     switch (m_state)
     {
     case WModeAddVer:
-        {
-            Vertex* newvert = new Vertex(0,0);
-            CmdAddVert* cmdadd = new CmdAddVert(newvert,m_scn);
-            cmdadd->Do();
-            l_verts.append(newvert);
-            l_commands.append(cmdadd);
-            ui->textEdit->insertPlainText("Added vert\n");
-            CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
-            cmdsetpos->Do();
-            l_commands.append(cmdsetpos);
-            ui->textEdit->insertPlainText("Set Pos\n");
-            m_state = WModeIdle;
-        }
+    {
+        Vertex* newvert = new Vertex(0,0);
+        CmdAddVert* cmdadd = new CmdAddVert(newvert,m_scn);
+        cmdadd->Do();
+        l_verts.append(newvert);
+        l_commands.append(cmdadd);
+        ui->textEdit->insertPlainText("Added vert\n");
+        CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
+        cmdsetpos->Do();
+        l_commands.append(cmdsetpos);
+        ui->textEdit->insertPlainText("Set Pos\n");
+        m_state = WModeIdle;
+    }
         break;
     case WModeAddArrowP1:
+    {
+        if (m_scn->selectedItems().count() == 1)
         {
             m_curr = m_scn->selectedItems().first();
             m_last = m_curr;
@@ -77,19 +79,28 @@ void MainWindow::SceneMouseReleased(QPointF pos)
             m_state = WModeAddArrowP2;
             ui->textEdit->insertPlainText("Adding arrow, selected first item\n");
         }
+    }
         break;
     case WModeAddArrowP2:
+    {
+        if (m_scn->selectedItems().count() == 1)
         {
             m_curr = m_scn->selectedItems().first();
-            Arrow * newarr = new Arrow(m_last,m_curr);
-            CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
-            cmd->Do();
-            l_arrows.append(newarr);
-            l_commands.append(cmd);
-            m_state = WModeIdle;
-            m_last->setOpacity(1);
-            ui->textEdit->insertPlainText("Adding arrow, selected second item\n");
+            if (m_curr != m_last) {
+                Arrow * newarr = new Arrow(m_last,m_curr);
+                CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
+                cmd->Do();
+                l_arrows.append(newarr);
+                l_commands.append(cmd);
+                m_state = WModeIdle;
+                m_last->setOpacity(1);
+                ui->textEdit->insertPlainText("Adding arrow, selected second item\n");
+            }else
+            {
+                ui->textEdit->insertPlainText("First and second item is equal, please select another\n");
+            }
         }
+    }
         break;
     default:
         break;
@@ -98,7 +109,7 @@ void MainWindow::SceneMouseReleased(QPointF pos)
 
 void MainWindow::SceneContextMenu(QPointF pos)
 {
-   // m_vertMenu->exec(pos,m_vertMenuInfoAction);
+    // m_vertMenu->exec(pos,m_vertMenuInfoAction);
 }
 
 void MainWindow::AddVert()
