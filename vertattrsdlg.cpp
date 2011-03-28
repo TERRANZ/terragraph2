@@ -27,5 +27,8 @@ void VertAttrsDlg::changeEvent(QEvent *e)
 
 void VertAttrsDlg::load(Vertex *v)
 {
-
+    ui->le_name->setText(v->id());
+    ui->le_rem->setText(v->rem());
+    ui->le_chan->setText(v->text());
+    ui->spCount->setValue(v->repCount());
 }

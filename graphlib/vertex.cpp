@@ -6,12 +6,13 @@ Vertex::Vertex(QGraphicsItem *parent,QGraphicsScene *scn)
     m_scn = scn;
     m_graphText = new QGraphicsTextItem(this,m_scn);
     m_graphText->setPos(0,7);
-    setId("");
-    setRem("");
-    setText("");
-    setNext("");
+    setId("this is id");
+    setRem("this is rem");
+    setText("text");
+    setNext("this is next");
     setType(0);
     setSendOrRecv(1);
+    setRepCount(0);
     this->setRect(0,0,30,30);
     this->setFlag(QGraphicsItem::ItemIsMovable);
     this->setFlag(QGraphicsItem::ItemIsSelectable);
@@ -46,4 +47,9 @@ void Vertex::setType(int type)
 void Vertex::setSendOrRecv(int send_or_recv)
 {
     m_send_or_recv = send_or_recv;
+}
+
+void Vertex::setRepCount(int repCount)
+{
+    m_repcount = repCount;
 }

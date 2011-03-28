@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Вершина</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -31,10 +31,10 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="le_name"/>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="le_rem"/>
      </item>
     </layout>
    </item>
@@ -85,7 +85,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="channel"/>
+       <widget class="QLineEdit" name="le_chan"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_6">
@@ -95,7 +95,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="method"/>
+       <widget class="QLineEdit" name="le_method"/>
       </item>
       <item row="2" column="0" colspan="2">
        <widget class="QGroupBox" name="groupBox_4">
@@ -104,14 +104,14 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QRadioButton" name="client">
+          <widget class="QRadioButton" name="rbCli">
            <property name="text">
             <string>Клиентский</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="server">
+          <widget class="QRadioButton" name="rbSrv">
            <property name="text">
             <string>Серверный</string>
            </property>
@@ -140,7 +140,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QSpinBox" name="counter"/>
+       <widget class="QSpinBox" name="spCount"/>
       </item>
      </layout>
     </widget>
@@ -161,14 +161,14 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="save">
+      <widget class="QPushButton" name="btnSave">
        <property name="text">
         <string>Сохранить</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="cancel">
+      <widget class="QPushButton" name="btnCancel">
        <property name="text">
         <string>Отмена</string>
        </property>

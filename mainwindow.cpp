@@ -143,7 +143,8 @@ void MainWindow::Exit()
 
 void MainWindow::vertMenuInfo()
 {
-    if (m_curr != 0) {
+    if (m_curr != 0)
+    {
         vertattrdlg = new VertAttrsDlg(this);
         vertattrdlg->load(m_curr);
         vertattrdlg->show();
