@@ -4,7 +4,7 @@
 class Geometry
 {
 public:
-    Geometry();
+//    static float circle_size = 30.0;
 };
 
 #endif // GEOMETRY_H

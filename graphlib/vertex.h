@@ -29,6 +29,8 @@ private:
     int m_type,m_send_or_recv;
     QGraphicsTextItem* m_graphText;
     QGraphicsScene* m_scn;
+protected:
+
 };
 
 #endif // BASEGRAPHITEM_H

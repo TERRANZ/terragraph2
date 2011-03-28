@@ -10,7 +10,6 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     graphlib/vertex.cpp \
     graphlib/arrow.cpp \
-    graphlib/geometry.cpp \
     vertattrsdlg.cpp \
     dom.cpp \
     xmllib/xmlbackend.cpp \
