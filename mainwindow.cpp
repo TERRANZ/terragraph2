@@ -47,6 +47,15 @@ void MainWindow::changeEvent(QEvent *e)
 
 void MainWindow::SceneSelection()
 {
+    m_last = m_curr;
+    if (m_scn->selectedItems().count() != 0)
+    {
+        m_curr = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
+    }
+    else
+    {
+        m_curr = 0;
+    }
 
 }
 
@@ -73,7 +82,7 @@ void MainWindow::SceneMouseReleased(QPointF pos)
     {
         if (m_scn->selectedItems().count() == 1)
         {
-            m_curr = m_scn->selectedItems().first();
+            m_curr = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
             m_last = m_curr;
             m_curr->setOpacity(0.25);
             m_state = WModeAddArrowP2;
@@ -85,7 +94,7 @@ void MainWindow::SceneMouseReleased(QPointF pos)
     {
         if (m_scn->selectedItems().count() == 1)
         {
-            m_curr = m_scn->selectedItems().first();
+            m_curr = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
             if (m_curr != m_last) {
                 Arrow * newarr = new Arrow(m_last,m_curr);
                 CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
@@ -134,8 +143,11 @@ void MainWindow::Exit()
 
 void MainWindow::vertMenuInfo()
 {
-    vertattrdlg = new VertAttrsDlg(this);
-    vertattrdlg->show();
+    if (m_curr != 0) {
+        vertattrdlg = new VertAttrsDlg(this);
+        vertattrdlg->load(m_curr);
+        vertattrdlg->show();
+    }
 }
 
 void MainWindow::vertMenuDelete()

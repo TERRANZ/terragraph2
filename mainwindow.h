@@ -57,7 +57,7 @@ private:
     QAction* m_vertMenuInfoAction;
     QAction* m_vertMenuDeleteAction;
     VertAttrsDlg* vertattrdlg;
-    QGraphicsItem *m_last,*m_curr;
+    Vertex *m_last,*m_curr;
 
 private slots:
     void SceneSelection();
