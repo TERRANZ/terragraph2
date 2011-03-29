@@ -21,8 +21,12 @@ signals:
 protected:
     void changeEvent(QEvent *e);
 
+private slots:
+    void on_btnSave_clicked();
+
 private:
     Ui::VertAttrsDlg *ui;
+    Vertex* m_vert;
 };
 
 #endif // VERTATTRSDLG_H

@@ -147,6 +147,7 @@ void MainWindow::vertMenuInfo()
     {
         vertattrdlg = new VertAttrsDlg(this);
         vertattrdlg->load(m_curr);
+        connect(vertattrdlg,SIGNAL(signalOk(Vertex*)),this,SLOT(vertAttrSignalOk(Vertex*)));
         vertattrdlg->show();
     }
 }
@@ -154,4 +155,9 @@ void MainWindow::vertMenuInfo()
 void MainWindow::vertMenuDelete()
 {
 
+}
+
+void MainWindow::vertAttrSignalOk(Vertex *v)
+{
+    m_curr = v;
 }

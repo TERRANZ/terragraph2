@@ -17,13 +17,8 @@ SOURCES += main.cpp \
     commands/cmdaddarr.cpp \
     commands/cmddelvert.cpp \
     commands/cmddelarr.cpp \
-    commands/cmdvertsettext.cpp \
-    commands/cmdvertsetid.cpp \
     commands/cmdvertsetpos.cpp \
-    commands/cmdvertsettype.cpp \
-    commands/cmdvertsetsendorrecv.cpp \
     commands/cmdarrsetstartend.cpp \
-    commands/cmdarrsettext.cpp \
     graphlib/graphicscene.cpp
 HEADERS += mainwindow.h \
     graphlib/vertex.h \
@@ -38,13 +33,8 @@ HEADERS += mainwindow.h \
     commands/cmdaddarr.h \
     commands/cmddelvert.h \
     commands/cmddelarr.h \
-    commands/cmdvertsettext.h \
-    commands/cmdvertsetid.h \
     commands/cmdvertsetpos.h \
-    commands/cmdvertsettype.h \
-    commands/cmdvertsetsendorrecv.h \
     commands/cmdarrsetstartend.h \
-    commands/cmdarrsettext.h \
     graphlib/graphicscene.h
 FORMS += mainwindow.ui \
     vertattrsdlg.ui

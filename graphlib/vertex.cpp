@@ -26,6 +26,7 @@ void Vertex::setId(QString id)
 void Vertex::setRem(QString rem)
 {
     m_rem = rem;
+    setToolTip(m_rem);
 }
 
 void Vertex::setText(QString text)

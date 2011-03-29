@@ -71,6 +71,7 @@ private slots:
 
     void vertMenuInfo();
     void vertMenuDelete();
+    void vertAttrSignalOk(Vertex *v);
 };
 
 #endif // MAINWINDOW_H
