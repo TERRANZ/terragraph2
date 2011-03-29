@@ -19,7 +19,9 @@ SOURCES += main.cpp \
     commands/cmddelarr.cpp \
     commands/cmdvertsetpos.cpp \
     commands/cmdarrsetstartend.cpp \
-    graphlib/graphicscene.cpp
+    graphlib/graphicscene.cpp \
+    commands/cmdvertsetinfo.cpp \
+    commands/cmdarrsetinfo.cpp
 HEADERS += mainwindow.h \
     graphlib/vertex.h \
     graphlib/arrow.h \
@@ -35,7 +37,9 @@ HEADERS += mainwindow.h \
     commands/cmddelarr.h \
     commands/cmdvertsetpos.h \
     commands/cmdarrsetstartend.h \
-    graphlib/graphicscene.h
+    graphlib/graphicscene.h \
+    commands/cmdvertsetinfo.h \
+    commands/cmdarrsetinfo.h
 FORMS += mainwindow.ui \
     vertattrsdlg.ui
 RESOURCES += icons.qrc

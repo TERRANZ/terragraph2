@@ -16,14 +16,9 @@
 #include "commands/cmdaddarr.h"
 #include "commands/cmdaddvert.h"
 #include "commands/cmdarrsetstartend.h"
-#include "commands/cmdarrsettext.h"
 #include "commands/cmddelarr.h"
 #include "commands/cmddelvert.h"
-#include "commands/cmdvertsetid.h"
 #include "commands/cmdvertsetpos.h"
-#include "commands/cmdvertsetsendorrecv.h"
-#include "commands/cmdvertsettext.h"
-#include "commands/cmdvertsettype.h"
 
 namespace Ui {
     class MainWindow;
