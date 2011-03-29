@@ -7,14 +7,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    dom = new Dom();
     m_state = MainWindow::WModeIdle;
     m_scn = new GraphicScene(ui->centralWidget);
     m_view = new QGraphicsView(m_scn,ui->centralWidget);
     ui->verticalLayout->addWidget(m_view,Qt::AlignTop);
+
     m_scn->setSceneRect(0,0,250,250);
     connect(m_scn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
     connect(m_scn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
     connect(m_scn,SIGNAL(mouseContextMenuSignal(QPointF)),this,SLOT(SceneContextMenu(QPointF)));
+
     m_vertMenu = new QMenu(m_view);
     m_vertMenuInfoAction = new QAction(this);
     m_vertMenuDeleteAction = new QAction(this);
@@ -69,7 +72,7 @@ void MainWindow::SceneMouseReleased(QPointF pos)
         Vertex* newvert = new Vertex(0,0);
         CmdAddVert* cmdadd = new CmdAddVert(newvert,m_scn);
         cmdadd->Do();
-        l_verts.append(newvert);
+        dom->addVert(newvert);
         l_commands.append(cmdadd);
         ui->textEdit->insertPlainText("Added vert\n");
         CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
@@ -101,7 +104,7 @@ void MainWindow::SceneMouseReleased(QPointF pos)
                 CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
                 cmd->Do();
                 ui->textEdit->insertPlainText("Arrow added\n");
-                l_arrows.append(newarr);
+                dom->addArr(newarr);
                 l_commands.append(cmd);
                 m_state = WModeIdle;
                 m_last->setOpacity(1);

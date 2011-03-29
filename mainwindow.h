@@ -43,8 +43,6 @@ protected:
 
 private:
     Ui::MainWindow* ui;
-    QList<Vertex*> l_verts;
-    QList<Arrow*> l_arrows;
     GraphicScene* m_scn;
     QGraphicsView* m_view;
     QList<Command*> l_commands;
@@ -54,6 +52,7 @@ private:
     QAction* m_vertMenuDeleteAction;
     VertAttrsDlg* vertattrdlg;
     Vertex *m_last,*m_curr;
+    Dom *dom;
 
 private slots:
     void SceneSelection();
