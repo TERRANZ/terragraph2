@@ -48,6 +48,7 @@ public:
 private:
     QList<Vertex*> l_verts;
     QList<Arrow*> l_arrows;
+    QString m_modId,m_modVer,m_modRem;
 };
 
 #endif // DOM_H
