@@ -42,6 +42,7 @@
     <addaction name="actAddVert"/>
     <addaction name="actAddArr"/>
     <addaction name="actDel"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -124,6 +125,10 @@
    </property>
   </action>
   <action name="actDel">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/delete</normaloff>:/icons/delete</iconset>
+   </property>
    <property name="text">
     <string>Удалить</string>
    </property>
@@ -145,7 +150,9 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actAddVert</sender>

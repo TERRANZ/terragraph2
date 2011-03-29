@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "math.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -119,7 +120,7 @@ void MainWindow::SceneMouseReleased(QPointF pos)
 
 void MainWindow::SceneContextMenu(QPointF pos)
 {
-    // m_vertMenu->exec(pos,m_vertMenuInfoAction);
+     m_vertMenu->exec(QPoint(round(pos.x()),round(pos.y())));
 }
 
 void MainWindow::AddVert()

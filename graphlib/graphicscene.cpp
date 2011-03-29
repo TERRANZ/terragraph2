@@ -14,5 +14,5 @@ void GraphicScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 void GraphicScene::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QGraphicsScene::contextMenuEvent(event);
-    emit mouseContextMenuSignal(event->scenePos());
+    emit mouseContextMenuSignal(event->screenPos());
 }

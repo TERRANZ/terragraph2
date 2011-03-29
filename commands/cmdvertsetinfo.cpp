@@ -9,7 +9,7 @@ CmdVertSetInfo::CmdVertSetInfo(Vertex *v,QString id,QString rem, QString text)
     m_id = id;
     m_rem = rem;
     m_text = text;
-    setCmd(Command::CMD_VERT_SET_INFO);
+    setCmd(CMD_VERT_SET_INFO);
 }
 
 void CmdVertSetInfo::Do()
