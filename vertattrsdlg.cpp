@@ -36,8 +36,5 @@ void VertAttrsDlg::load(Vertex *v)
 
 void VertAttrsDlg::on_btnSave_clicked()
 {
-    m_vert->setId(ui->le_name->text());
-    m_vert->setRem(ui->le_rem->text());
-    m_vert->setText(ui->le_chan->text());
-    emit signalOk(m_vert);
+    emit signalOk(ui->le_name->text(),ui->le_rem->text(),ui->le_chan->text());
 }

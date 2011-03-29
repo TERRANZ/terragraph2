@@ -19,6 +19,7 @@
 #include "commands/cmddelarr.h"
 #include "commands/cmddelvert.h"
 #include "commands/cmdvertsetpos.h"
+#include "commands/cmdvertsetinfo.h"
 
 namespace Ui {
     class MainWindow;
@@ -66,7 +67,7 @@ private slots:
 
     void vertMenuInfo();
     void vertMenuDelete();
-    void vertAttrSignalOk(Vertex *v);
+    void vertAttrSignalOk(QString id, QString rem, QString text);
 };
 
 #endif // MAINWINDOW_H

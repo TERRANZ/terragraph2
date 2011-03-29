@@ -9,13 +9,11 @@ public:
         CMD_DELVERT = 1,
         CMD_ADDARR  = 3,
         CMD_DELARR  = 4,
-        CMD_VERT_SETTEXT = 5,
-        CMD_VERT_SETID   = 6,
-        CMD_VERT_SETPOS  = 7,
-        CMD_VERT_SETTYPE = 8,
-        CMD_ARR_SETSTART = 9,
-        CMD_ARR_SETEND   = 10,
-        CMD_ARR_SETETXT  = 11,
+        CMD_VERT_SET_INFO = 5,
+        CMD_VERT_SETPOS = 6,
+        CMD_ARR_SETSTART = 7,
+        CMD_ARR_SETEND   = 8,
+        CMD_ARR_SET_INFO  = 9,
     };
     virtual void Do(){};
     virtual void UnDo(){};

@@ -99,6 +99,7 @@ void MainWindow::SceneMouseReleased(QPointF pos)
                 Arrow * newarr = new Arrow(m_last,m_curr);
                 CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
                 cmd->Do();
+                ui->textEdit->insertPlainText("Arrow added\n");
                 l_arrows.append(newarr);
                 l_commands.append(cmd);
                 m_state = WModeIdle;
@@ -147,7 +148,8 @@ void MainWindow::vertMenuInfo()
     {
         vertattrdlg = new VertAttrsDlg(this);
         vertattrdlg->load(m_curr);
-        connect(vertattrdlg,SIGNAL(signalOk(Vertex*)),this,SLOT(vertAttrSignalOk(Vertex*)));
+        connect(vertattrdlg,SIGNAL(signalOk(QString,QString,QString)),
+                this,SLOT(vertAttrSignalOk(QString,QString,QString)));
         vertattrdlg->show();
     }
 }
@@ -157,7 +159,10 @@ void MainWindow::vertMenuDelete()
 
 }
 
-void MainWindow::vertAttrSignalOk(Vertex *v)
+void MainWindow::vertAttrSignalOk(QString id, QString rem, QString text)
 {
-    m_curr = v;
+    CmdVertSetInfo *cmd = new CmdVertSetInfo(m_curr,id,rem,text);
+    cmd->Do();
+    l_commands.append(cmd);
+    ui->textEdit->insertPlainText("Setting info to vertex\n");
 }
