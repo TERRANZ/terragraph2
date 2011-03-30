@@ -1,0 +1,39 @@
+<module id="Sample" ver="1" rem="Sample module description file">
+
+<include file="another_module_file" module="mod"/>
+
+<param id="rtl" value="gprt.h"/>
+
+<channel id="Chan" entry="entry" templet="" rem="Sample channel 'Chan' declaration">
+	<param id="par" value="Parameter for given templet can be used"/>
+
+	<state id="entry" type="cli" x="0" y="0" rem="Channel 'Chan' 'entry' state">
+		<message id="message" state="end" x="0" y="0" rem="Message from 'entry' to 'end' state"/>
+	</state>
+	<state id="end" type="srv" x="0" y="0" rem="Channel 'Chan' terminal state">
+	</state>
+</channel>
+
+<process id="Proc" entry="method1" templet="" rem="Sample process 'Proc' declaration">
+	<param id="par" value="Parameter for given templet can be used"/>
+
+	<port id="port" channel="Chan" module="" type="cli" x="0" y="0" rem="Client side port with type 'Chan'">
+		<receive id="message" method="method1" x="0" y="0" rem="Reseiving message from 'port' to 'method1'"/>
+	</port>
+	<method id="method1" count="2" x="0" y="0" rem="Method 'method1' awaiting 2 messages">
+		<condition id="cond" method="method2" x="0" y="0" rem="Condition 'cond'"/>
+		<send id="message" port="port" x="0" y="0" rem="Sending 'message' back to 'port'"/>
+		<activate method="method1" x="0" y="0" rem="Sending activation message to oneself"/>
+	</method>
+	<method id="method2" count="1" x="0" y="0" rem="Method 'method2' awaiting 1 message">
+	</method>
+</process>
+
+<assemble id="Asm" templet="" rem="Sample assemble 'Asm' declaration">
+	<param id="par" value="Parameter for given templet can be used"/>
+
+	<process id="Proc" module=""/>
+	<channel id="Chan" module=""/>
+</assemble>
+
+</module>
