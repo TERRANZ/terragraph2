@@ -43,16 +43,17 @@ protected:
 
 private:
     Ui::MainWindow* ui;
-    GraphicScene* m_scn;
-    QGraphicsView* m_view;
+    GraphicScene *m_ProcScn,*m_ChanScn;
+    QGraphicsView *m_ProcView,*m_ChanView;
     QList<Command*> l_commands;
     int m_state;
-    QMenu* m_vertMenu;
-    QAction* m_vertMenuInfoAction;
-    QAction* m_vertMenuDeleteAction;
-    VertAttrsDlg* vertattrdlg;
+    QMenu *m_vertMenu;
+    QAction *m_vertMenuInfoAction;
+    QAction *m_vertMenuDeleteAction;
+    VertAttrsDlg *vertattrdlg;
     Vertex *m_last,*m_curr;
-    Dom *dom;
+    int m_CurrTab;
+    Dom *m_ProcDom,*m_ChanDom;
 
 private slots:
     void SceneSelection();

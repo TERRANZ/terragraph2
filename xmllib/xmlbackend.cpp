@@ -2,7 +2,7 @@
 
 XmlBackEnd::XmlBackEnd()
 {
-
+    initDomTree();
 }
 
 int XmlBackEnd::SaveTo(QString &filename, Dom *d)

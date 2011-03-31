@@ -45,10 +45,14 @@ public:
         l_arrows.removeAt(ind);
     }
 
+    void setType(int t) {m_type = t;};
+    int type() {return m_type;};
+
 private:
     QList<Vertex*> l_verts;
     QList<Arrow*> l_arrows;
     QString m_modId,m_modVer,m_modRem;
+    int m_type; //0 - channel, 1 - process
 };
 
 #endif // DOM_H

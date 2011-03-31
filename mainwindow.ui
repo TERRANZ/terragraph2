@@ -6,22 +6,43 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>400</height>
+    <width>563</width>
+    <height>433</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>TerraGraph2</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout"/>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tbProc">
+       <property name="toolTip">
+        <string>Process</string>
+       </property>
+       <attribute name="title">
+        <string>Process</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tbChan">
+       <attribute name="title">
+        <string>Channel</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>600</width>
+     <width>563</width>
      <height>25</height>
     </rect>
    </property>
@@ -82,8 +103,8 @@
     <number>8</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
       <widget class="QTextEdit" name="textEdit"/>
      </item>
     </layout>
