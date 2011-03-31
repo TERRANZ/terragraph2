@@ -9,6 +9,7 @@ SceneWidget::SceneWidget(QWidget *parent) :
     m_view = new QGraphicsView(m_scn,this);
     m_scn->setSceneRect(0,0,250,250);
 
+
     connect(m_scn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
     connect(m_scn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
     connect(m_scn,SIGNAL(mouseContextMenuSignal(QPointF)),this,SLOT(SceneContextMenu(QPointF)));
