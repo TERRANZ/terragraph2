@@ -7,32 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    m_procDom = new Dom();
-    m_chanDom = new Dom();
-    m_state = MainWindow::WModeIdle;
-    m_procScn = new GraphicScene(ui->tbProc);
-    m_procView = new QGraphicsView(m_procScn,ui->tbProc);
-    m_chanScn = new GraphicScene(ui->tbChan);
-    m_chanView = new QGraphicsView(m_chanScn,ui->tbChan);
-    m_currScn = m_procScn;
-    m_currView = m_procView;
-    m_prevScn = m_procScn;
-    m_prevView = m_procView;
-    m_currDom = m_procDom;
-    m_prevDom = m_procDom;
+    m_procSceneWidget = new SceneWidget(ui->tbProc);
+    m_chanSceneWidget = new SceneWidget(ui->tbChan);
 
-    m_procScn->setSceneRect(0,0,250,250);
-    m_chanScn->setSceneRect(0,0,150,250);
-
-    connect(m_procScn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
-    connect(m_procScn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
-    connect(m_procScn,SIGNAL(mouseContextMenuSignal(QPointF)),this,SLOT(SceneContextMenu(QPointF)));
-
-    connect(m_chanScn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
-    connect(m_chanScn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
-    connect(m_chanScn,SIGNAL(mouseContextMenuSignal(QPointF)),this,SLOT(SceneContextMenu(QPointF)));
-
-    m_vertMenu = new QMenu(m_procView);
+    m_vertMenu = new QMenu();
     m_vertMenuInfoAction = new QAction(this);
     m_vertMenuDeleteAction = new QAction(this);
 
@@ -63,91 +41,14 @@ void MainWindow::changeEvent(QEvent *e)
     }
 }
 
-void MainWindow::SceneSelection()
-{
-    m_prevVert = m_currVert;
-    if (m_currScn->selectedItems().count() != 0)
-    {
-        m_currVert = dynamic_cast<Vertex*>(m_currScn->selectedItems().first());
-    }
-    else
-    {
-        m_currVert = 0;
-    }
-
-}
-
-void MainWindow::SceneMouseReleased(QPointF pos)
-{
-    switch (m_state)
-    {
-    case WModeAddVer:
-    {
-        Vertex* newvert = new Vertex(0,0);
-        CmdAddVert* cmdadd = new CmdAddVert(newvert,m_currScn);
-        cmdadd->Do();
-        m_currDom->addVert(newvert);
-        l_commands.append(cmdadd);
-        ui->textEdit->insertPlainText("Added vert\n");
-        CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
-        cmdsetpos->Do();
-        l_commands.append(cmdsetpos);
-        ui->textEdit->insertPlainText("Set Pos\n");
-        m_state = WModeIdle;
-    }
-        break;
-    case WModeAddArrowP1:
-    {
-        if (m_currScn->selectedItems().count() == 1)
-        {
-            m_currVert = dynamic_cast<Vertex*>(m_currScn->selectedItems().first());
-            m_prevVert = m_currVert;
-            m_currVert->setOpacity(0.25);
-            m_state = WModeAddArrowP2;
-            ui->textEdit->insertPlainText("Adding arrow, selected first item\n");
-        }
-    }
-        break;
-    case WModeAddArrowP2:
-    {
-        if (m_currScn->selectedItems().count() == 1)
-        {
-            m_currVert = dynamic_cast<Vertex*>(m_currScn->selectedItems().first());
-            if (m_currVert != m_prevVert) {
-                Arrow * newarr = new Arrow(m_prevVert,m_currVert);
-                CmdAddArr *cmd = new CmdAddArr(newarr,m_currScn);
-                cmd->Do();
-                ui->textEdit->insertPlainText("Arrow added\n");
-                m_currDom->addArr(newarr);
-                l_commands.append(cmd);
-                m_state = WModeIdle;
-                m_prevVert->setOpacity(1);
-                ui->textEdit->insertPlainText("Adding arrow, selected second item\n");
-            }else
-            {
-                ui->textEdit->insertPlainText("First and second item is equal, please select another\n");
-            }
-        }
-    }
-        break;
-    default:
-        break;
-    }
-}
-
-void MainWindow::SceneContextMenu(QPointF pos)
-{
-    m_vertMenu->exec(QPoint(round(pos.x()),round(pos.y())));
-}
-
 void MainWindow::AddVert()
 {
-    m_state = WModeAddVer;
+    m_currSceneWidget->setMode(SceneWidget::WModeAddVer);
 }
 
 void MainWindow::AddArr()
 {
-    m_state = WModeAddArrowP1;
+    m_currSceneWidget->setMode(SceneWidget::WModeAddArrowP1);
 }
 
 void MainWindow::Del()
@@ -162,10 +63,10 @@ void MainWindow::Exit()
 
 void MainWindow::vertMenuInfo()
 {
-    if (m_currVert != 0)
+    if (m_currSceneWidget->currVert() != 0)
     {
         vertattrdlg = new VertAttrsDlg(this);
-        vertattrdlg->load(m_currVert);
+        vertattrdlg->load(m_currSceneWidget->currVert());
         connect(vertattrdlg,SIGNAL(signalOk(QString,QString,QString)),
                 this,SLOT(vertAttrSignalOk(QString,QString,QString)));
         vertattrdlg->show();
@@ -179,10 +80,10 @@ void MainWindow::vertMenuDelete()
 
 void MainWindow::vertAttrSignalOk(QString id, QString rem, QString text)
 {
-    CmdVertSetInfo *cmd = new CmdVertSetInfo(m_currVert,id,rem,text);
-    cmd->Do();
-    l_commands.append(cmd);
-    ui->textEdit->insertPlainText("Setting info to vertex\n");
+//    CmdVertSetInfo *cmd = new CmdVertSetInfo(m_currSceneWidget->currVert(),id,rem,text);
+//    cmd->Do();
+//    l_commands.append(cmd);
+//    ui->textEdit->insertPlainText("Setting info to vertex\n");
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index)
@@ -193,22 +94,12 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     case 0:
     {
         //Process tab selected
-        m_prevScn = m_currScn;
-        m_prevView = m_currView;
-        m_prevDom = m_currDom;
-        m_currScn = m_procScn;
-        m_currView = m_procView;
-        m_currDom = m_procDom;
+        m_currSceneWidget = m_procSceneWidget;
     }break;
     case 1:
     {
         //Channel tab selected
-        m_prevScn = m_currScn;
-        m_prevView = m_currView;
-        m_prevDom = m_currDom;
-        m_currScn = m_chanScn;
-        m_currView = m_chanView;
-        m_currDom = m_chanDom;
+        m_currSceneWidget = m_chanSceneWidget;
     }break;
     }
 }
