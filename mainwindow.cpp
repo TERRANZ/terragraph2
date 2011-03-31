@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     m_procDom = new Dom();
+    m_chanDom = new Dom();
     m_state = MainWindow::WModeIdle;
     m_procScn = new GraphicScene(ui->tbProc);
     m_procView = new QGraphicsView(m_procScn,ui->tbProc);
@@ -26,6 +27,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_procScn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
     connect(m_procScn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
     connect(m_procScn,SIGNAL(mouseContextMenuSignal(QPointF)),this,SLOT(SceneContextMenu(QPointF)));
+
+    connect(m_chanScn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
+    connect(m_chanScn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
+    connect(m_chanScn,SIGNAL(mouseContextMenuSignal(QPointF)),this,SLOT(SceneContextMenu(QPointF)));
 
     m_vertMenu = new QMenu(m_procView);
     m_vertMenuInfoAction = new QAction(this);
@@ -61,9 +66,9 @@ void MainWindow::changeEvent(QEvent *e)
 void MainWindow::SceneSelection()
 {
     m_prevVert = m_currVert;
-    if (m_procScn->selectedItems().count() != 0)
+    if (m_currScn->selectedItems().count() != 0)
     {
-        m_currVert = dynamic_cast<Vertex*>(m_procScn->selectedItems().first());
+        m_currVert = dynamic_cast<Vertex*>(m_currScn->selectedItems().first());
     }
     else
     {
