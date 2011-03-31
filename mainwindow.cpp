@@ -12,10 +12,11 @@ MainWindow::MainWindow(QWidget *parent) :
     m_ProcScn = new GraphicScene(ui->tbProc);
     m_ProcView = new QGraphicsView(m_ProcScn,ui->tbProc);
     m_ChanScn = new GraphicScene(ui->tbChan);
-    m_ProcView = new QGraphicsView(m_ProcScn,ui->tbChan);
+    m_ChanView = new QGraphicsView(m_ChanScn,ui->tbChan);
 
 
-    //m_scn->setSceneRect(0,0,250,250);
+    m_ProcScn->setSceneRect(0,0,250,250);
+    m_ChanScn->setSceneRect(0,0,150,250);
 
     connect(m_ProcScn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
     connect(m_ProcScn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
