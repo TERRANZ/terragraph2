@@ -13,7 +13,12 @@ MainWindow::MainWindow(QWidget *parent) :
     m_procView = new QGraphicsView(m_procScn,ui->tbProc);
     m_chanScn = new GraphicScene(ui->tbChan);
     m_chanView = new QGraphicsView(m_chanScn,ui->tbChan);
-
+    m_currScn = m_procScn;
+    m_currView = m_procView;
+    m_prevScn = m_procScn;
+    m_prevView = m_procView;
+    m_currDom = m_procDom;
+    m_prevDom = m_procDom;
 
     m_procScn->setSceneRect(0,0,250,250);
     m_chanScn->setSceneRect(0,0,150,250);
@@ -74,9 +79,9 @@ void MainWindow::SceneMouseReleased(QPointF pos)
     case WModeAddVer:
     {
         Vertex* newvert = new Vertex(0,0);
-        CmdAddVert* cmdadd = new CmdAddVert(newvert,m_procScn);
+        CmdAddVert* cmdadd = new CmdAddVert(newvert,m_currScn);
         cmdadd->Do();
-        m_procDom->addVert(newvert);
+        m_currDom->addVert(newvert);
         l_commands.append(cmdadd);
         ui->textEdit->insertPlainText("Added vert\n");
         CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
@@ -88,9 +93,9 @@ void MainWindow::SceneMouseReleased(QPointF pos)
         break;
     case WModeAddArrowP1:
     {
-        if (m_procScn->selectedItems().count() == 1)
+        if (m_currScn->selectedItems().count() == 1)
         {
-            m_currVert = dynamic_cast<Vertex*>(m_procScn->selectedItems().first());
+            m_currVert = dynamic_cast<Vertex*>(m_currScn->selectedItems().first());
             m_prevVert = m_currVert;
             m_currVert->setOpacity(0.25);
             m_state = WModeAddArrowP2;
@@ -100,15 +105,15 @@ void MainWindow::SceneMouseReleased(QPointF pos)
         break;
     case WModeAddArrowP2:
     {
-        if (m_procScn->selectedItems().count() == 1)
+        if (m_currScn->selectedItems().count() == 1)
         {
-            m_currVert = dynamic_cast<Vertex*>(m_procScn->selectedItems().first());
+            m_currVert = dynamic_cast<Vertex*>(m_currScn->selectedItems().first());
             if (m_currVert != m_prevVert) {
                 Arrow * newarr = new Arrow(m_prevVert,m_currVert);
-                CmdAddArr *cmd = new CmdAddArr(newarr,m_procScn);
+                CmdAddArr *cmd = new CmdAddArr(newarr,m_currScn);
                 cmd->Do();
                 ui->textEdit->insertPlainText("Arrow added\n");
-                m_procDom->addArr(newarr);
+                m_currDom->addArr(newarr);
                 l_commands.append(cmd);
                 m_state = WModeIdle;
                 m_prevVert->setOpacity(1);
@@ -127,7 +132,7 @@ void MainWindow::SceneMouseReleased(QPointF pos)
 
 void MainWindow::SceneContextMenu(QPointF pos)
 {
-     m_vertMenu->exec(QPoint(round(pos.x()),round(pos.y())));
+    m_vertMenu->exec(QPoint(round(pos.x()),round(pos.y())));
 }
 
 void MainWindow::AddVert()
@@ -178,4 +183,27 @@ void MainWindow::vertAttrSignalOk(QString id, QString rem, QString text)
 void MainWindow::on_tabWidget_currentChanged(int index)
 {
     m_currTab = index;
+    switch (index)
+    {
+    case 0:
+    {
+        //Process tab selected
+        m_prevScn = m_currScn;
+        m_prevView = m_currView;
+        m_prevDom = m_currDom;
+        m_currScn = m_procScn;
+        m_currView = m_procView;
+        m_currDom = m_procDom;
+    }break;
+    case 1:
+    {
+        //Channel tab selected
+        m_prevScn = m_currScn;
+        m_prevView = m_currView;
+        m_prevDom = m_currDom;
+        m_currScn = m_chanScn;
+        m_currView = m_chanView;
+        m_currDom = m_chanDom;
+    }break;
+    }
 }
