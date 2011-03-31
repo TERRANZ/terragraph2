@@ -174,3 +174,8 @@ void MainWindow::vertAttrSignalOk(QString id, QString rem, QString text)
     l_commands.append(cmd);
     ui->textEdit->insertPlainText("Setting info to vertex\n");
 }
+
+void MainWindow::on_tabWidget_currentChanged(int index)
+{
+    m_currTab = index;
+}
