@@ -9,6 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     m_procSceneWidget = new SceneWidget(ui->tbProc);
     m_chanSceneWidget = new SceneWidget(ui->tbChan);
+    connect(m_procSceneWidget,SIGNAL(logSignal(QString)),this,SLOT(logSlot(QString)));
+    connect(m_chanSceneWidget,SIGNAL(logSignal(QString)),this,SLOT(logSlot(QString)));
+    connect(m_procSceneWidget,SIGNAL(contextMenuSignal(QPointF)),this,SLOT(sceneContextMenuSignal(QPointF)));
+    connect(m_chanSceneWidget,SIGNAL(contextMenuSignal(QPointF)),this,SLOT(sceneContextMenuSignal(QPointF)));
 
     m_vertMenu = new QMenu();
     m_vertMenuInfoAction = new QAction(this);
@@ -80,10 +84,10 @@ void MainWindow::vertMenuDelete()
 
 void MainWindow::vertAttrSignalOk(QString id, QString rem, QString text)
 {
-//    CmdVertSetInfo *cmd = new CmdVertSetInfo(m_currSceneWidget->currVert(),id,rem,text);
-//    cmd->Do();
-//    l_commands.append(cmd);
-//    ui->textEdit->insertPlainText("Setting info to vertex\n");
+    //    CmdVertSetInfo *cmd = new CmdVertSetInfo(m_currSceneWidget->currVert(),id,rem,text);
+    //    cmd->Do();
+    //    l_commands.append(cmd);
+    //    ui->textEdit->insertPlainText("Setting info to vertex\n");
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index)
@@ -102,4 +106,15 @@ void MainWindow::on_tabWidget_currentChanged(int index)
         m_currSceneWidget = m_chanSceneWidget;
     }break;
     }
+}
+
+void MainWindow::logSlot(QString logstr)
+{
+    ui->textEdit->insertPlainText(logstr);
+    ui->textEdit->insertPlainText("\n");
+}
+
+void MainWindow::sceneContextMenuSignal(QPointF pos)
+{
+    m_vertMenu->exec(QPoint(round(pos.x()),round(pos.y())));
 }

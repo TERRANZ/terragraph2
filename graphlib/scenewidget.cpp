@@ -41,11 +41,11 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         cmdadd->Do();
         m_dom->addVert(newvert);
         l_commands.append(cmdadd);
-        //ui->textEdit->insertPlainText("Added vert\n");
+        emit logSignal("Added vert\n");
         CmdVertSetPos *cmdsetpos = new CmdVertSetPos(newvert,pos);
         cmdsetpos->Do();
         l_commands.append(cmdsetpos);
-        //ui->textEdit->insertPlainText("Set Pos\n");
+        emit logSignal("Set Pos\n");
         m_mode = WModeIdle;
     }
         break;
@@ -57,7 +57,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             m_prevVert = m_currVert;
             m_currVert->setOpacity(0.25);
             m_mode = WModeAddArrowP2;
-            //ui->textEdit->insertPlainText("Adding arrow, selected first item\n");
+            emit logSignal("Adding arrow, selected first item\n");
         }
     }
         break;
@@ -70,15 +70,15 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
                 Arrow * newarr = new Arrow(m_prevVert,m_currVert);
                 CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
                 cmd->Do();
-                //ui->textEdit->insertPlainText("Arrow added\n");
+                emit logSignal("Arrow added\n");
                 m_dom->addArr(newarr);
                 l_commands.append(cmd);
                 m_mode = WModeIdle;
                 m_prevVert->setOpacity(1);
-                //ui->textEdit->insertPlainText("Adding arrow, selected second item\n");
+                emit logSignal("Adding arrow, selected second item\n");
             }else
             {
-                //ui->textEdit->insertPlainText("First and second item is equal, please select another\n");
+                emit logSignal("First and second item is equal, please select another\n");
             }
         }
     }
@@ -90,5 +90,5 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
 
 void SceneWidget::SceneContextMenu(QPointF pos)
 {
-    //m_vertMenu->exec(QPoint(round(pos.x()),round(pos.y())));
+    emit contextMenuSignal(pos);
 }

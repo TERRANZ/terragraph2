@@ -33,7 +33,10 @@ public:
     int mode() {return m_mode;};
     QGraphicsView* view() {return m_view;};
     Vertex* currVert() {return m_currVert;};
+
 signals:
+    void logSignal(QString msg);
+    void contextMenuSignal(QPointF pos);
 
 public slots:
 
