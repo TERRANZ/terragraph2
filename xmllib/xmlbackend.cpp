@@ -2,7 +2,6 @@
 
 XmlBackEnd::XmlBackEnd()
 {
-    initDomTree();
 }
 
 int XmlBackEnd::SaveTo(QString &filename, Dom *d)
@@ -12,12 +11,28 @@ int XmlBackEnd::SaveTo(QString &filename, Dom *d)
 
 Dom* XmlBackEnd::LoadFrom(QString &filename)
 {
-    return 0;
+    QFile* file = new QFile(filename);
+    if (!file->open(QIODevice::ReadOnly | QIODevice::Text)) {
+        return 0;
+    }
+    QDomDocument doc;
+    Dom *dom = new Dom();
+    doc.setContent(file);
+    QDomElement moduleElement = doc.documentElement();
+    QString rootTag = moduleElement.tagName();
+    if (rootTag == "module")
+    {
+        dom->setModId(moduleElement.attribute("id","id"));
+        dom->setModVer(moduleElement.attribute("ver","0"));
+        dom->setModRem(moduleElement.attribute("rem","rem"));
+    }
+    file->close();
+    return dom;
 }
 
-void XmlBackEnd::initDomTree()
+void XmlBackEnd::initDomTree(QDomDocument &doc)
 {
-/*Тут надо создать начальные элементы, пустые списки
+    /*Тут надо создать начальные элементы, пустые списки
 <module id="Sample" ver="1" rem="Sample module description file">
 <include file="another_module_file" module="mod"/>
 <param id="rtl" value="gprt.h"/>

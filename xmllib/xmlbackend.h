@@ -16,7 +16,7 @@ public:
     Dom* LoadFrom(QString &filename);
 
 private:
-    void initDomTree();
+    void initDomTree(QDomDocument &doc);
     QDomDocument *document;
 
 };
