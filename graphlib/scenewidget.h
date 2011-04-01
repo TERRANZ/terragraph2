@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QGraphicsView>
+#include <QResizeEvent>
 #include "arrow.h"
 #include "graphicscene.h"
 #include "vertex.h"
@@ -20,7 +21,7 @@ class SceneWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SceneWidget(QWidget *parent = 0);
+    explicit SceneWidget(QWidget *parent = 0,int type = 0);
     enum {
         WModeIdle = 0, //Состояние спокойствия, ждём пользователя
         WModeAddArrowP1 = 1, //Добавляем стрелку, ещё не выбрали элемент
@@ -52,6 +53,8 @@ private slots:
     void SceneSelection();
     void SceneMouseReleased(QPointF pos);
     void SceneContextMenu(QPointF pos);
+protected:
+    void resizeEvent (QResizeEvent * event);
 };
 
 #endif // SCENEWIDGET_H

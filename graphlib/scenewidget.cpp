@@ -1,14 +1,14 @@
 #include "scenewidget.h"
 
-SceneWidget::SceneWidget(QWidget *parent) :
+SceneWidget::SceneWidget(QWidget *parent,int type) :
     QWidget(parent)
 {
     m_dom = new Dom();
+    m_dom->setType(type);
     m_mode = WModeIdle;
     m_scn = new GraphicScene(this);
     m_view = new QGraphicsView(m_scn,this);
-    m_scn->setSceneRect(0,0,250,250);
-
+    m_scn->setSceneRect(0,0,5000,5000);
 
     connect(m_scn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
     connect(m_scn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
@@ -92,4 +92,10 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
 void SceneWidget::SceneContextMenu(QPointF pos)
 {
     emit contextMenuSignal(pos);
+}
+
+void SceneWidget::resizeEvent (QResizeEvent * event)
+{/*
+    m_scn->setSceneRect(0,0,this->childrenRect().x(),this->childrenRect().y());
+    QWidget::resizeEvent(event);*/
 }

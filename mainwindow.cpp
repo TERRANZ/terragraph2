@@ -7,10 +7,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    m_procSceneWidget = new SceneWidget();
-    m_chanSceneWidget = new SceneWidget();
+    m_procSceneWidget = new SceneWidget(0,0);
+    m_chanSceneWidget = new SceneWidget(0,1);
     QBoxLayout *l_proc = new QBoxLayout(QBoxLayout::LeftToRight,ui->tbProc);
     QBoxLayout *l_chan = new QBoxLayout(QBoxLayout::LeftToRight,ui->tbChan);
+    m_currSceneWidget = m_procSceneWidget;
 
     ui->tbProc->setLayout(l_proc);
     ui->tbChan->setLayout(l_chan);

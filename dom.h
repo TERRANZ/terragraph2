@@ -48,6 +48,13 @@ public:
     void setType(int t) {m_type = t;};
     int type() {return m_type;};
 
+    void setModId(QString id) { m_modId = id;};
+    void setModVer(QString ver) { m_modVer = ver;};
+    void setModRem(QString rem) { m_modRem = rem;};
+    QString modId() {return m_modId;};
+    QString modVer() {return m_modVer;};
+    QString modRem() {return m_modRem;};
+
 private:
     QList<Vertex*> l_verts;
     QList<Arrow*> l_arrows;
