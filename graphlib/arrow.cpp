@@ -4,7 +4,7 @@
 const qreal Pi = 3.14;
 
 Arrow::Arrow(QGraphicsItem *startItem, QGraphicsItem *endItem,
-                 QGraphicsItem *parent, QGraphicsScene *scene)
+             QGraphicsItem *parent, QGraphicsScene *scene)
 {
     m_startItem = startItem;
     m_endItem = endItem;
@@ -19,8 +19,8 @@ QRectF Arrow::boundingRect() const
 
     return QRectF(line().p1(), QSizeF(line().p2().x() - line().p1().x(),
                                       line().p2().y() - line().p1().y()))
-    .normalized()
-    .adjusted(-extra, -extra, extra, extra);
+           .normalized()
+           .adjusted(-extra, -extra, extra, extra);
 }
 
 QPainterPath Arrow::shape() const
@@ -37,7 +37,7 @@ void Arrow::processPosUpdate(const QPointF &newpos)
 }
 
 void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
-                    QWidget *)
+                  QWidget *)
 {
     if (m_startItem->collidesWithItem(m_endItem))
         return;

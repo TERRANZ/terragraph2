@@ -49,7 +49,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         emit logSignal("Set Pos\n");
         m_mode = WModeIdle;
     }
-        break;
+    break;
     case WModeAddArrowP1:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -61,7 +61,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             emit logSignal("Adding arrow, selected first item\n");
         }
     }
-        break;
+    break;
     case WModeAddArrowP2:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -77,13 +77,13 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
                 m_mode = WModeIdle;
                 m_prevVert->setOpacity(1);
                 emit logSignal("Adding arrow, selected second item\n");
-            }else
+            } else
             {
                 emit logSignal("First and second item is equal, please select another\n");
             }
         }
     }
-        break;
+    break;
     default:
         break;
     }
@@ -95,7 +95,7 @@ void SceneWidget::SceneContextMenu(QPointF pos)
 }
 
 void SceneWidget::resizeEvent (QResizeEvent * event)
-{/*
-    m_scn->setSceneRect(0,0,this->childrenRect().x(),this->childrenRect().y());
-    QWidget::resizeEvent(event);*/
+{   /*
+       m_scn->setSceneRect(0,0,this->childrenRect().x(),this->childrenRect().y());
+       QWidget::resizeEvent(event);*/
 }

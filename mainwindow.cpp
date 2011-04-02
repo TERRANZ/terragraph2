@@ -108,12 +108,14 @@ void MainWindow::on_tabWidget_currentChanged(int index)
     {
         //Process tab selected
         m_currSceneWidget = m_procSceneWidget;
-    }break;
+    }
+    break;
     case 1:
     {
         //Channel tab selected
         m_currSceneWidget = m_chanSceneWidget;
-    }break;
+    }
+    break;
     }
 }
 

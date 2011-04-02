@@ -12,8 +12,8 @@ class XmlBackEnd: public DomBackEnd
 {
 public:
     XmlBackEnd();
-    int SaveTo(QString &filename, Dom *d);
-    Dom* LoadFrom(QString &filename);
+    int SaveTo(QString &filename, QList<Dom*> dl);
+    QList<Dom*> LoadFrom(QString &filename);
 
 private:
     void initDomTree(QDomDocument &doc);
