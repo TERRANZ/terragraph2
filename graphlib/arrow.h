@@ -35,5 +35,7 @@ private:
     QGraphicsItem *m_endItem;
     QColor m_colour;
     QPolygonF m_arrowHead;
+    QString rem;
+    qreal x,y;
 };
 #endif // ARROW_H

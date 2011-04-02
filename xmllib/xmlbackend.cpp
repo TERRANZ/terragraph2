@@ -6,11 +6,68 @@ XmlBackEnd::XmlBackEnd()
 
 int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
 {
-    foreach (Dom* d,dl)
-    {
+    QDomDocument module("XML");
+    QDomElement modinfo = module.createElement("module");
+    module.appendChild(modinfo);
+    modinfo.setAttribute("id","id");
+    modinfo.setAttribute("rem","");
+    modinfo.setAttribute("ver","1.0");
 
+    QFile* file = new QFile(filename);
+    if (!file->open(QIODevice::ReadWrite)) {
+        return 1;
     }
 
+    foreach (Dom* d,dl)
+    {
+        switch (d->type())
+        {
+        case 0:
+        {
+            //channel
+            QDomElement modulechannel = module.createElement("channel");
+            modulechannel.setAttribute("id","");
+            modulechannel.setAttribute("entry","");
+            modulechannel.setAttribute("templet","");
+            modulechannel.setAttribute("rem","");
+            modinfo.appendChild(modulechannel);
+            foreach (Vertex *v,d->verts())
+            {
+                QDomElement channelstate = module.createElement("state");
+                channelstate.setAttribute("id",v->id());
+                channelstate.setAttribute("type",v->send_or_recv());
+                channelstate.setAttribute("x",v->pos().x());
+                channelstate.setAttribute("y",v->pos().y());
+                channelstate.setAttribute("rem",v->rem());
+                modulechannel.appendChild(channelstate);
+                foreach (Arrow *a,d->arrows())
+                {
+//                    if (arrow->getArrowEnt()->start() == gp)
+//                    {
+//                        //Нашли начальный элемент стрелки
+//                        QDomElement itemArrow;
+//                        itemArrow = module.createElement("message");
+//                        itemArrow.setAttribute("state",a->stopitem()->);
+//                        itemArrow.setAttribute("id",arrow->getArrowEnt()->id());
+//                        itemArrow.setAttribute("x",arrow->breakpos().x());
+//                        itemArrow.setAttribute("y",arrow->breakpos().y());
+//                        itemArrow.setAttribute("rem",arrow->getArrowEnt()->rem());
+//                        channelstate.appendChild(itemArrow);
+//                    }
+                }
+            }
+
+
+        } break;
+        case 1:
+        {
+            //process
+        } break;
+        }
+    }
+
+    QTextStream out(file);
+    module.save(out, 4);
     return 0;
 }
 

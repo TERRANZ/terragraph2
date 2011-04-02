@@ -9,6 +9,11 @@
 class Vertex : public QGraphicsEllipseItem
 {
 public:
+    enum {
+        VTPort = 0,
+        VTMethod = 1,
+        VTState = 2
+    };
     Vertex(QGraphicsItem *parent,QGraphicsScene *scn);
 
     QString id() {

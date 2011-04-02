@@ -3,6 +3,8 @@
 
 #include "../dom.h"
 #include "../dombackend.h"
+#include "../graphlib/vertex.h"
+#include "../graphlib/arrow.h"
 #include <QList>
 #include <QFile>
 #include <QDomDocument>
