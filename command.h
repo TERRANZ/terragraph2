@@ -15,10 +15,14 @@ public:
         CMD_ARR_SETEND   = 8,
         CMD_ARR_SET_INFO  = 9,
     };
-    virtual void Do(){};
-    virtual void UnDo(){};
-    void setCmd(int cmd) {m_command = cmd;};
-    int  cmd() {return m_command;};
+    virtual void Do() {};
+    virtual void UnDo() {};
+    void setCmd(int cmd) {
+        m_command = cmd;
+    };
+    int  cmd() {
+        return m_command;
+    };
 
 private:
     int m_command;

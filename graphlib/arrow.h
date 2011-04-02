@@ -15,11 +15,15 @@ class Arrow : public QGraphicsLineItem
 {
 public:
     Arrow(QGraphicsItem *startItem, QGraphicsItem *endItem,
-            QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
+          QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
     QRectF boundingRect() const;
     QPainterPath shape() const;
-    QGraphicsItem *startitem() {return m_startItem;};
-    QGraphicsItem *stopitem() {return m_endItem;};
+    QGraphicsItem *startitem() {
+        return m_startItem;
+    };
+    QGraphicsItem *stopitem() {
+        return m_endItem;
+    };
     void processPosUpdate(const QPointF &newpos);
 
 protected:

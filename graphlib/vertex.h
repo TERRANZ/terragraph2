@@ -11,13 +11,27 @@ class Vertex : public QGraphicsEllipseItem
 public:
     Vertex(QGraphicsItem *parent,QGraphicsScene *scn);
 
-    QString id() {return m_id;};
-    QString rem() {return m_rem;};
-    QString text() {return m_text;};
-    QString next() {return m_next;};
-    int     vtype() {return m_type;};
-    int     send_or_recv() {return m_send_or_recv;};
-    int     repCount() {return m_repcount;};
+    QString id() {
+        return m_id;
+    };
+    QString rem() {
+        return m_rem;
+    };
+    QString text() {
+        return m_text;
+    };
+    QString next() {
+        return m_next;
+    };
+    int     vtype() {
+        return m_type;
+    };
+    int     send_or_recv() {
+        return m_send_or_recv;
+    };
+    int     repCount() {
+        return m_repcount;
+    };
     void setId(QString id);
     void setRem(QString rem);
     void setText(QString text);

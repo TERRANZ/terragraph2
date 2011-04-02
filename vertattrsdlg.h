@@ -5,7 +5,7 @@
 #include "graphlib/vertex.h"
 
 namespace Ui {
-    class VertAttrsDlg;
+class VertAttrsDlg;
 }
 
 class VertAttrsDlg : public QDialog {

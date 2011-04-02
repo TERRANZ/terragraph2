@@ -6,6 +6,11 @@ XmlBackEnd::XmlBackEnd()
 
 int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
 {
+    foreach (Dom* d,dl)
+    {
+
+    }
+
     return 0;
 }
 

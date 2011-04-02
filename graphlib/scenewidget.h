@@ -30,10 +30,18 @@ public:
         WModeAddVer = 4, //Добавляем вершину при следующем нажатии
         WModeDelVert = 5 //Удаляем вершину при следующем выделении
     };
-    void setMode(int m) { m_mode = m;};
-    int mode() {return m_mode;};
-    QGraphicsView* view() {return m_view;};
-    Vertex* currVert() {return m_currVert;};
+    void setMode(int m) {
+        m_mode = m;
+    };
+    int mode() {
+        return m_mode;
+    };
+    QGraphicsView* view() {
+        return m_view;
+    };
+    Vertex* currVert() {
+        return m_currVert;
+    };
 
 signals:
     void logSignal(QString msg);
