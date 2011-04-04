@@ -13,7 +13,6 @@ SceneWidget::SceneWidget(QWidget *parent,int type) :
     connect(m_scn,SIGNAL(mouseReleaseSignal(QPointF)),this,SLOT(SceneMouseReleased(QPointF)));
     connect(m_scn,SIGNAL(selectionChanged()),this,SLOT(SceneSelection()));
     connect(m_scn,SIGNAL(mouseContextMenuSignal(QPointF)),this,SLOT(SceneContextMenu(QPointF)));
-
 }
 
 
@@ -28,7 +27,6 @@ void SceneWidget::SceneSelection()
     {
         m_currVert = 0;
     }
-
 }
 
 void SceneWidget::SceneMouseReleased(QPointF pos)
@@ -49,7 +47,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         emit logSignal("Set Pos\n");
         m_mode = WModeIdle;
     }
-    break;
+        break;
     case WModeAddArrowP1:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -61,7 +59,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             emit logSignal("Adding arrow, selected first item\n");
         }
     }
-    break;
+        break;
     case WModeAddArrowP2:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -83,7 +81,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             }
         }
     }
-    break;
+        break;
     default:
         break;
     }
@@ -95,7 +93,15 @@ void SceneWidget::SceneContextMenu(QPointF pos)
 }
 
 void SceneWidget::resizeEvent (QResizeEvent * event)
-{   /*
-       m_scn->setSceneRect(0,0,this->childrenRect().x(),this->childrenRect().y());
-       QWidget::resizeEvent(event);*/
+{
+    //m_scn->setSceneRect(0,0,this->childrenRect().x(),this->childrenRect().y());
+    QWidget::resizeEvent(event);
+}
+
+void SceneWidget::setVertexParams(QString id, QString rem, QString text)
+{
+    CmdVertSetInfo *cmd = new CmdVertSetInfo(currVert(),id,rem,text);
+    cmd->Do();
+    l_commands.append(cmd);
+    emit logSignal("Setting info to vertex\n");
 }

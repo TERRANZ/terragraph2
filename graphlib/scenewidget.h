@@ -43,6 +43,7 @@ public:
         return m_currVert;
     };
 
+    void setVertexParams(QString id, QString rem, QString text);
 signals:
     void logSignal(QString msg);
     void contextMenuSignal(QPointF pos);

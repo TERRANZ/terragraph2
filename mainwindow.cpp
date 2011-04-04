@@ -93,10 +93,7 @@ void MainWindow::vertMenuDelete()
 
 void MainWindow::vertAttrSignalOk(QString id, QString rem, QString text)
 {
-    //    CmdVertSetInfo *cmd = new CmdVertSetInfo(m_currSceneWidget->currVert(),id,rem,text);
-    //    cmd->Do();
-    //    l_commands.append(cmd);
-    //    ui->textEdit->insertPlainText("Setting info to vertex\n");
+    m_currSceneWidget->setVertexParams(id,rem,text);
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index)
