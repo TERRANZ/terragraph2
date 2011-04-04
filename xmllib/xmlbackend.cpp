@@ -6,12 +6,12 @@ XmlBackEnd::XmlBackEnd()
 
 int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
 {
-    QDomDocument module("XML");
-    QDomElement modinfo = module.createElement("module");
-    module.appendChild(modinfo);
-    modinfo.setAttribute("id","id");
-    modinfo.setAttribute("rem","");
-    modinfo.setAttribute("ver","1.0");
+    QDomDocument xmldocroot("XML");
+    QDomElement module = xmldocroot.createElement("module");
+    xmldocroot.appendChild(module);
+    module.setAttribute("id","id");
+    module.setAttribute("rem","");
+    module.setAttribute("ver","1.0");
 
     QFile* file = new QFile(filename);
     if (!file->open(QIODevice::ReadWrite)) {
@@ -25,33 +25,36 @@ int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
         case 0:
         {
             //channel
-            QDomElement modulechannel = module.createElement("channel");
+            QDomElement modulechannel = xmldocroot.createElement("channel");
             modulechannel.setAttribute("id","");
             modulechannel.setAttribute("entry","");
             modulechannel.setAttribute("templet","");
             modulechannel.setAttribute("rem","");
-            modinfo.appendChild(modulechannel);
+            module.appendChild(modulechannel);
             foreach (Vertex *v,d->verts())
             {
-                QDomElement channelstate = module.createElement("state");
+                QDomElement channelstate = xmldocroot.createElement("state");
                 channelstate.setAttribute("id",v->id());
                 channelstate.setAttribute("type",v->send_or_recv());
                 channelstate.setAttribute("x",v->pos().x());
                 channelstate.setAttribute("y",v->pos().y());
                 channelstate.setAttribute("rem",v->rem());
                 modulechannel.appendChild(channelstate);
+                foreach (Arrow *a,d->arrows())
+                {
+                    if (a->startitem() == v) {
+                        QDomElement itemArrow;
+                        itemArrow = xmldocroot.createElement("message");
+                        itemArrow.setAttribute("state",a->stopitem()->id());
+                        itemArrow.setAttribute("id",a->id());
+                        itemArrow.setAttribute("x",a->breakX());
+                        itemArrow.setAttribute("y",a->breakY());
+                        itemArrow.setAttribute("rem",a->rem());
+                        channelstate.appendChild(itemArrow);
+                    }
+                }
             }
-            foreach (Arrow *a,d->arrows())
-            {
-//                QDomElement itemArrow;
-//                itemArrow = module.createElement("message");
-//                itemArrow.setAttribute("state",a->stopitem()->id());
-//                itemArrow.setAttribute("id",a->id());
-//                itemArrow.setAttribute("x",a->breakX());
-//                itemArrow.setAttribute("y",a->breakY());
-//                itemArrow.setAttribute("rem",a->rem());
-//                channelstate.appendChild(itemArrow);
-            }
+
 
         } break;
         case 1:
@@ -62,7 +65,7 @@ int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
     }
 
     QTextStream out(file);
-    module.save(out, 4);
+    xmldocroot.save(out, 4);
     return 0;
 }
 
