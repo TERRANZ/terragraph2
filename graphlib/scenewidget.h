@@ -21,19 +21,19 @@ class SceneWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit SceneWidget(QWidget *parent = 0,int type = 0);
-    enum {
-        WModeIdle = 0, //Состояние спокойствия, ждём пользователя
-        WModeAddArrowP1 = 1, //Добавляем стрелку, ещё не выбрали элемент
-        WModeAddArrowP2 = 2, //Добавляем стрелку, выбрали первый элемент
-        WModeDelArrow = 3, //Удаляем стрелку при следующем выделении
-        WModeAddVer = 4, //Добавляем вершину при следующем нажатии
-        WModeDelVert = 5 //Удаляем вершину при следующем выделении
+    explicit SceneWidget(QWidget *parent = 0,Dom::DomType type = Dom::DTChannel);
+    enum SceneMode{
+        SWModeIdle, //Состояние спокойствия, ждём пользователя
+        SWModeAddArrowP1, //Добавляем стрелку, ещё не выбрали элемент
+        SWModeAddArrowP2, //Добавляем стрелку, выбрали первый элемент
+        SWModeDelArrow, //Удаляем стрелку при следующем выделении
+        SWModeAddVer, //Добавляем вершину при следующем нажатии
+        SWModeDelVert //Удаляем вершину при следующем выделении
     };
-    void setMode(int m) {
+    void setMode(SceneMode m) {
         m_mode = m;
     };
-    int mode() {
+    SceneMode mode() {
         return m_mode;
     };
     QGraphicsView* view() {
@@ -42,6 +42,9 @@ public:
     Vertex* currVert() {
         return m_currVert;
     };
+    Dom* dom(){
+        return m_dom;
+    }
 
     void setVertexParams(QString id, QString rem, QString text);
 signals:
@@ -55,7 +58,7 @@ private:
     QGraphicsView *m_view;
     QList<Command*> l_commands;
     Vertex *m_prevVert,*m_currVert;
-    int m_mode;
+    SceneMode m_mode;
     Dom *m_dom;
 
 private slots:

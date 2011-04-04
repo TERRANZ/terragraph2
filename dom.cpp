@@ -5,7 +5,7 @@ Dom::Dom()
     setModId("id");
     setModVer("0");
     setModRem("rem");
-    setType(0);
+    setType(DTChannel);
 }
 
 Dom::~Dom()

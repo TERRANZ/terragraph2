@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    m_procSceneWidget = new SceneWidget(0,0);
-    m_chanSceneWidget = new SceneWidget(0,1);
+    m_procSceneWidget = new SceneWidget(0,Dom::DTProcess);
+    m_chanSceneWidget = new SceneWidget(0,Dom::DTChannel);
     QBoxLayout *l_proc = new QBoxLayout(QBoxLayout::LeftToRight,ui->tbProc);
     QBoxLayout *l_chan = new QBoxLayout(QBoxLayout::LeftToRight,ui->tbChan);
     m_currSceneWidget = m_procSceneWidget;
@@ -56,12 +56,12 @@ void MainWindow::changeEvent(QEvent *e)
 
 void MainWindow::AddVert()
 {
-    m_currSceneWidget->setMode(SceneWidget::WModeAddVer);
+    m_currSceneWidget->setMode(SceneWidget::SWModeAddVer);
 }
 
 void MainWindow::AddArr()
 {
-    m_currSceneWidget->setMode(SceneWidget::WModeAddArrowP1);
+    m_currSceneWidget->setMode(SceneWidget::SWModeAddArrowP1);
 }
 
 void MainWindow::Del()
@@ -72,6 +72,19 @@ void MainWindow::Del()
 void MainWindow::Exit()
 {
 
+}
+
+void MainWindow::SaveAs()
+{
+    QString fileName = QFileDialog::getSaveFileName(this,
+                                                    trUtf8("Сохранить XML файл"), "", trUtf8("XML файлы (*.xml)"));
+    if (fileName != "") {
+        XmlBackEnd *xmlbackend = new XmlBackEnd();
+        QList<Dom*> doms;
+        doms.append(m_procSceneWidget->dom());
+        doms.append(m_chanSceneWidget->dom());
+        xmlbackend->SaveTo(fileName,doms);
+    }
 }
 
 void MainWindow::vertMenuInfo()

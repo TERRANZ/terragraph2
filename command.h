@@ -4,28 +4,28 @@
 class Command
 {
 public:
-    enum {
-        CMD_ADDVERT = 0,
-        CMD_DELVERT = 1,
-        CMD_ADDARR  = 3,
-        CMD_DELARR  = 4,
-        CMD_VERT_SET_INFO = 5,
-        CMD_VERT_SETPOS = 6,
-        CMD_ARR_SETSTART = 7,
-        CMD_ARR_SETEND   = 8,
-        CMD_ARR_SET_INFO  = 9,
+    enum CmdType{
+        CMD_ADDVERT,
+        CMD_DELVERT,
+        CMD_ADDARR,
+        CMD_DELARR,
+        CMD_VERT_SET_INFO,
+        CMD_VERT_SETPOS,
+        CMD_ARR_SETSTART,
+        CMD_ARR_SETEND,
+        CMD_ARR_SET_INFO
     };
     virtual void Do() {};
     virtual void UnDo() {};
-    void setCmd(int cmd) {
+    void setCmd(CmdType cmd) {
         m_command = cmd;
     };
-    int  cmd() {
+    CmdType  cmd() {
         return m_command;
     };
 
 private:
-    int m_command;
+    CmdType m_command;
 };
 
 #endif // COMMAND_H

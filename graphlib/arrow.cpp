@@ -11,6 +11,10 @@ Arrow::Arrow(Vertex *startItem, Vertex *endItem,
     setFlag(QGraphicsItem::ItemIsSelectable);
     m_colour = Qt::black;
     setPen(QPen(m_colour, 2, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    setBreakX(startItem->x());
+    setBreakY(startItem->y());
+    setRem("arrow rem");
+    setId("arrow id");
 }
 
 QRectF Arrow::boundingRect() const

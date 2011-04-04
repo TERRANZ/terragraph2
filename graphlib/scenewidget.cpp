@@ -1,11 +1,11 @@
 #include "scenewidget.h"
 
-SceneWidget::SceneWidget(QWidget *parent,int type) :
+SceneWidget::SceneWidget(QWidget *parent,Dom::DomType type) :
     QWidget(parent)
 {
     m_dom = new Dom();
     m_dom->setType(type);
-    m_mode = WModeIdle;
+    m_mode = SWModeIdle;
     m_scn = new GraphicScene(this);
     m_view = new QGraphicsView(m_scn,this);
     m_scn->setSceneRect(0,0,5000,5000);
@@ -33,9 +33,12 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
 {
     switch (m_mode)
     {
-    case WModeAddVer:
+    case SWModeAddVer:
     {
         Vertex* newvert = new Vertex(0,0);
+        QString newvertid;
+        newvertid.setNum(m_dom->verts().count()+1);
+        newvert->setId(newvert->id()+newvertid);
         CmdAddVert* cmdadd = new CmdAddVert(newvert,m_scn);
         cmdadd->Do();
         m_dom->addVert(newvert);
@@ -45,34 +48,37 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         cmdsetpos->Do();
         l_commands.append(cmdsetpos);
         emit logSignal("Set Pos\n");
-        m_mode = WModeIdle;
+        m_mode = SWModeIdle;
     }
     break;
-    case WModeAddArrowP1:
+    case SWModeAddArrowP1:
     {
         if (m_scn->selectedItems().count() == 1)
         {
             m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
             m_prevVert = m_currVert;
             m_currVert->setOpacity(0.25);
-            m_mode = WModeAddArrowP2;
+            m_mode = SWModeAddArrowP2;
             emit logSignal("Adding arrow, selected first item\n");
         }
     }
     break;
-    case WModeAddArrowP2:
+    case SWModeAddArrowP2:
     {
         if (m_scn->selectedItems().count() == 1)
         {
             m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
             if (m_currVert != m_prevVert) {
                 Arrow * newarr = new Arrow(m_prevVert,m_currVert);
+                QString newarrid;
+                newarrid.setNum(m_dom->arrows().count()+1);
+                newarr->setId(newarr->id()+newarrid);
                 CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
                 cmd->Do();
                 emit logSignal("Arrow added\n");
                 m_dom->addArr(newarr);
                 l_commands.append(cmd);
-                m_mode = WModeIdle;
+                m_mode = SWModeIdle;
                 m_prevVert->setOpacity(1);
                 emit logSignal("Adding arrow, selected second item\n");
             } else

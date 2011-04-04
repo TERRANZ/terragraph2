@@ -22,9 +22,8 @@ int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
     {
         switch (d->type())
         {
-        case 0:
+        case Dom::DTChannel:
         {
-            //channel
             QDomElement modulechannel = xmldocroot.createElement("channel");
             modulechannel.setAttribute("id","");
             modulechannel.setAttribute("entry","");
@@ -57,9 +56,8 @@ int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
 
 
         } break;
-        case 1:
+        case Dom::DTProcess:
         {
-            //process
         } break;
         }
     }

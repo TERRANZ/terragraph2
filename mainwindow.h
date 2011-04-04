@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QMenu>
+#include <QFileDialog>
 #include "graphlib/scenewidget.h"
 #include "dom.h"
 #include "dombackend.h"
@@ -39,6 +40,7 @@ private slots:
     void AddArr();
     void Del();
     void Exit();
+    void SaveAs();
 
     void vertMenuInfo();
     void vertMenuDelete();

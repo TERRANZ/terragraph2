@@ -13,6 +13,12 @@ public:
     Dom();
     ~Dom();
 
+    enum DomType
+    {
+        DTChannel,
+        DTProcess
+    };
+
     int addVert(Vertex *v)
     {
         l_verts.append(v);
@@ -45,10 +51,10 @@ public:
         l_arrows.removeAt(ind);
     }
 
-    void setType(int t) {
+    void setType(DomType t) {
         m_type = t;
     };
-    int type() {
+    DomType type() {
         return m_type;
     };
 
@@ -81,7 +87,7 @@ private:
     QList<Vertex*> l_verts;
     QList<Arrow*> l_arrows;
     QString m_modId,m_modVer,m_modRem;
-    int m_type; //0 - channel, 1 - process
+    DomType m_type;
 };
 
 #endif // DOM_H
