@@ -40,23 +40,18 @@ int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
                 channelstate.setAttribute("y",v->pos().y());
                 channelstate.setAttribute("rem",v->rem());
                 modulechannel.appendChild(channelstate);
-                foreach (Arrow *a,d->arrows())
-                {
-//                    if (arrow->getArrowEnt()->start() == gp)
-//                    {
-//                        //Нашли начальный элемент стрелки
-//                        QDomElement itemArrow;
-//                        itemArrow = module.createElement("message");
-//                        itemArrow.setAttribute("state",a->stopitem()->);
-//                        itemArrow.setAttribute("id",arrow->getArrowEnt()->id());
-//                        itemArrow.setAttribute("x",arrow->breakpos().x());
-//                        itemArrow.setAttribute("y",arrow->breakpos().y());
-//                        itemArrow.setAttribute("rem",arrow->getArrowEnt()->rem());
-//                        channelstate.appendChild(itemArrow);
-//                    }
-                }
             }
-
+            foreach (Arrow *a,d->arrows())
+            {
+//                QDomElement itemArrow;
+//                itemArrow = module.createElement("message");
+//                itemArrow.setAttribute("state",a->stopitem()->id());
+//                itemArrow.setAttribute("id",a->id());
+//                itemArrow.setAttribute("x",a->breakX());
+//                itemArrow.setAttribute("y",a->breakY());
+//                itemArrow.setAttribute("rem",a->rem());
+//                channelstate.appendChild(itemArrow);
+            }
 
         } break;
         case 1:

@@ -71,8 +71,12 @@ public:
         return m_modRem;
     };
 
-    QList<Vertex*> const verts() { return l_verts;};
-    QList<Arrow*> const arrows() { return l_arrows;};
+    QList<Vertex*> const verts() {
+        return l_verts;
+    };
+    QList<Arrow*> const arrows() {
+        return l_arrows;
+    };
 private:
     QList<Vertex*> l_verts;
     QList<Arrow*> l_arrows;

@@ -47,7 +47,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         emit logSignal("Set Pos\n");
         m_mode = WModeIdle;
     }
-        break;
+    break;
     case WModeAddArrowP1:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -59,7 +59,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             emit logSignal("Adding arrow, selected first item\n");
         }
     }
-        break;
+    break;
     case WModeAddArrowP2:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -81,7 +81,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             }
         }
     }
-        break;
+    break;
     default:
         break;
     }
