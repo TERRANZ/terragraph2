@@ -10,18 +10,19 @@
 #include <QPainterPath>
 #include <QPen>
 #include <QPainter>
+#include "vertex.h"
 
 class Arrow : public QGraphicsLineItem
 {
 public:
-    Arrow(QGraphicsItem *startItem, QGraphicsItem *endItem,
+    Arrow(Vertex *startItem, Vertex *endItem,
           QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
     QRectF boundingRect() const;
     QPainterPath shape() const;
-    QGraphicsItem *startitem() {
+    Vertex *startitem() {
         return m_startItem;
     };
-    QGraphicsItem *stopitem() {
+    Vertex *stopitem() {
         return m_endItem;
     };
     void processPosUpdate(const QPointF &newpos);
@@ -31,8 +32,8 @@ protected:
                QWidget *widget = 0);
 
 private:
-    QGraphicsItem *m_startItem;
-    QGraphicsItem *m_endItem;
+    Vertex *m_startItem;
+    Vertex *m_endItem;
     QColor m_colour;
     QPolygonF m_arrowHead;
     QString rem;

@@ -3,7 +3,7 @@
 
 const qreal Pi = 3.14;
 
-Arrow::Arrow(QGraphicsItem *startItem, QGraphicsItem *endItem,
+Arrow::Arrow(Vertex *startItem, Vertex *endItem,
              QGraphicsItem *parent, QGraphicsScene *scene)
 {
     m_startItem = startItem;
