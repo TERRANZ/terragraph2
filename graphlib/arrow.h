@@ -19,6 +19,14 @@ public:
           QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
     QRectF boundingRect() const;
     QPainterPath shape() const;
+    enum ArrowType{
+        ATMessage,
+        ATReceive,
+        ATCondition,
+        ATSend,
+        ATActivate
+    };
+
     Vertex *startitem() {
         return m_startItem;
     };
@@ -50,6 +58,12 @@ public:
     void setBreakY(qreal y) {
         m_y = y;
     };
+    ArrowType arrowType(){
+        return m_arrType;
+    }
+    void setArrowType(ArrowType at){
+        m_arrType = at;
+    }
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -62,5 +76,6 @@ private:
     QPolygonF m_arrowHead;
     QString m_rem,m_id;
     qreal m_x,m_y;
+    ArrowType m_arrType;
 };
 #endif // ARROW_H

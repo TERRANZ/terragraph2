@@ -4,7 +4,7 @@ XmlBackEnd::XmlBackEnd()
 {
 }
 
-int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
+int XmlBackEnd::SaveTo(QString &filename,const QList<Dom*> dl)
 {
     QDomDocument xmldocroot("XML");
     QDomElement module = xmldocroot.createElement("module");
@@ -30,29 +30,34 @@ int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
             modulechannel.setAttribute("templet","");
             modulechannel.setAttribute("rem","");
             module.appendChild(modulechannel);
-            foreach (Vertex *v,d->verts())
+            for (unsigned int i = 0; i<=d->childNodes().length();i++)
             {
-                QDomElement channelstate = xmldocroot.createElement("state");
-                channelstate.setAttribute("id",v->id());
-                channelstate.setAttribute("type",v->send_or_recv());
-                channelstate.setAttribute("x",v->pos().x());
-                channelstate.setAttribute("y",v->pos().y());
-                channelstate.setAttribute("rem",v->rem());
-                modulechannel.appendChild(channelstate);
-                foreach (Arrow *a,d->arrows())
-                {
-                    if (a->startitem() == v) {
-                        QDomElement itemArrow;
-                        itemArrow = xmldocroot.createElement("message");
-                        itemArrow.setAttribute("state",a->stopitem()->id());
-                        itemArrow.setAttribute("id",a->id());
-                        itemArrow.setAttribute("x",a->breakX());
-                        itemArrow.setAttribute("y",a->breakY());
-                        itemArrow.setAttribute("rem",a->rem());
-                        channelstate.appendChild(itemArrow);
-                    }
-                }
+                xmldocroot.appendChild(d->childNodes().at(i));
             }
+
+//            foreach (Vertex *v,d->verts())
+//            {
+//                QDomElement channelstate = xmldocroot.createElement("state");
+//                channelstate.setAttribute("id",v->id());
+//                channelstate.setAttribute("type",v->send_or_recv());
+//                channelstate.setAttribute("x",v->pos().x());
+//                channelstate.setAttribute("y",v->pos().y());
+//                channelstate.setAttribute("rem",v->rem());
+//                modulechannel.appendChild(channelstate);
+//                foreach (Arrow *a,d->arrows())
+//                {
+//                    if (a->startitem() == v) {
+//                        QDomElement itemArrow;
+//                        itemArrow = xmldocroot.createElement("message");
+//                        itemArrow.setAttribute("state",a->stopitem()->id());
+//                        itemArrow.setAttribute("id",a->id());
+//                        itemArrow.setAttribute("x",a->breakX());
+//                        itemArrow.setAttribute("y",a->breakY());
+//                        itemArrow.setAttribute("rem",a->rem());
+//                        channelstate.appendChild(itemArrow);
+//                    }
+//                }
+//            }
 
 
         } break;
@@ -76,17 +81,66 @@ QList<Dom*> XmlBackEnd::LoadFrom(QString &filename)
     }
 
     QDomDocument doc;
-    Dom *dom = new Dom();
-    result.append(dom);
     doc.setContent(file);
     QDomElement moduleElement = doc.documentElement();
     QString rootTag = moduleElement.tagName();
+    Dom *dom = new Dom();
+    result.append(dom);
     if (rootTag == "module")
     {
-        dom->setModId(moduleElement.attribute("id","id"));
-        dom->setModVer(moduleElement.attribute("ver","0"));
-        dom->setModRem(moduleElement.attribute("rem","rem"));
+//        dom->setModId(moduleElement.attribute("id","id"));
+//        dom->setModVer(moduleElement.attribute("ver","0"));
+//        dom->setModRem(moduleElement.attribute("rem","rem"));
+//        //Заполнили параметры модуля, смотрим дальше
+        QDomNode modNode = moduleElement.firstChild();
+        while (!modNode.isNull())
+        {
+            if (modNode.isElement())
+            {
+                //QDomElement domElement = modNode.toElement();
+                QDomElement modNodeElement = modNode.toElement();
+                if (!modNodeElement.isNull())
+                {
+                    if (modNodeElement.tagName().toLower() == "process")
+                    {
+                        QDomNodeList l_methods = modNodeElement.elementsByTagName("method");
+                        QDomNodeList l_ports = modNodeElement.elementsByTagName("port");
+                        QString tmp;
+                        for (int i = 0;i<l_methods.count();i++)
+                        {
+                            //                            tmp.setNum(i);
+                            //                            GraphPrim *Start = a->getObjectById(items.item(i).toElement().attribute("id").toInt());
+                            //                            QDomNode item = items.item(i);
+                            //                            ParseItemArrows(item,a,p,Start);
+                        }
+
+                        for (int i = 0;i<l_ports.count();i++)
+                        {
+                            //                            tmp.setNum(i);
+                            //                            GraphPrim *Start = a->getObjectById(items.item(i).toElement().attribute("id").toInt());
+                            //                            QDomNode item = items.item(i);
+                            //                            ParseItemArrows(item,a,p,Start);
+                        }
+                    }
+
+                    if (modNodeElement.tagName().toLower() == "channel")
+                    {
+                        QDomNodeList l_states = modNodeElement.elementsByTagName("state");
+                        for (int i = 0;i<l_states.count();i++)
+                        {
+                            //                            QString tmp;
+                            //                            tmp.setNum(i);
+                            //                            GraphPrim *Start = a->getObjectById(items.item(i).toElement().attribute("id").toInt());
+                            //                            QDomNode item = items.item(i);
+                            //                            ParseItemArrows(item,a,c,Start);
+                        }
+                    }
+                }
+            }
+            modNode = modNode.nextSibling();
+        }
     }
+
     file->close();
     return result;
 }

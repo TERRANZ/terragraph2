@@ -8,7 +8,6 @@
 #include <QFileDialog>
 #include "graphlib/scenewidget.h"
 #include "dom.h"
-#include "dombackend.h"
 #include "vertattrsdlg.h"
 #include "xmllib/xmlbackend.h"
 

@@ -15,6 +15,7 @@ Arrow::Arrow(Vertex *startItem, Vertex *endItem,
     setBreakY(startItem->y());
     setRem("arrow rem");
     setId("arrow id");
+    setArrowType(ATMessage);
 }
 
 QRectF Arrow::boundingRect() const
