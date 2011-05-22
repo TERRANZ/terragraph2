@@ -4,7 +4,7 @@ XmlBackEnd::XmlBackEnd()
 {
 }
 
-int XmlBackEnd::SaveTo(QString &filename,QList<Dom*> dl)
+int XmlBackEnd::SaveTo(QString &filename,const QList<Dom*> dl)
 {
     QDomDocument xmldocroot("XML");
     QDomElement module = xmldocroot.createElement("module");

@@ -10,7 +10,7 @@ Vertex::Vertex(QGraphicsItem *parent,QGraphicsScene *scn)
     setRem("this is rem");
     setText("text");
     setNext("this is next");
-    setType(0);
+    setType(VTMethod);
     setSendOrRecv(1);
     setRepCount(0);
     this->setRect(0,0,30,30);
@@ -40,7 +40,7 @@ void Vertex::setNext(QString next)
     m_next = next;
 }
 
-void Vertex::setType(int type)
+void Vertex::setType(VertType type)
 {
     m_type = type;
 }

@@ -17,6 +17,14 @@ class Arrow : public QGraphicsLineItem
 public:
     Arrow(Vertex *startItem, Vertex *endItem,
           QGraphicsItem *parent = 0, QGraphicsScene *scene = 0);
+    enum ArrowType{
+        ATMessage,
+        ATReceive,
+        ATCondition,
+        ATSend,
+        ATActivate
+    };
+
     QRectF boundingRect() const;
     QPainterPath shape() const;
     Vertex *startitem() {
@@ -51,6 +59,13 @@ public:
         m_y = y;
     };
 
+    ArrowType arrowType(){
+        return m_arrType;
+    }
+    void setArrowType(ArrowType at){
+        m_arrType = at;
+    }
+
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget = 0);
@@ -62,5 +77,6 @@ private:
     QPolygonF m_arrowHead;
     QString m_rem,m_id;
     qreal m_x,m_y;
+    ArrowType m_arrType;
 };
 #endif // ARROW_H

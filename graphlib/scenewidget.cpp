@@ -71,7 +71,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             if (m_currVert != m_prevVert) {
                 Arrow * newarr = new Arrow(m_prevVert,m_currVert);
                 QString newarrid;
-                newarrid.setNum(m_dom->arrows().count()+1);
+                newarrid.setNum(random());
                 newarr->setId(newarr->id()+newarrid);
                 CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
                 cmd->Do();

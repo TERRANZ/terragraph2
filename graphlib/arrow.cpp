@@ -15,6 +15,7 @@ Arrow::Arrow(Vertex *startItem, Vertex *endItem,
     setBreakY(startItem->y());
     setRem("arrow rem");
     setId("arrow id");
+    setArrowType(ATMessage);
 }
 
 QRectF Arrow::boundingRect() const
@@ -67,9 +68,9 @@ void Arrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
 
     QPointF intersectPoint;
 
-    double ydiff = 1;
-    if (p1.y() > p2.y())
-        ydiff = -1;
+//    double ydiff = 1;
+//    if (p1.y() > p2.y())
+//        ydiff = -1;
 
     double angle = ::acos(line().dx() / line().length());
     if (line().dy() >= 0)
