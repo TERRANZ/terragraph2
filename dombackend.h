@@ -8,7 +8,7 @@
 class DomBackEnd
 {
 public:
-    virtual int SaveTo(QString &/*filename*/,const QList<Dom*> /*dom*/) {
+    virtual int SaveTo(QString &/*filename*/, QList<Dom*> /*dom*/) {
         return 0;
     };
     virtual QList<Dom*> LoadFrom(QString &/*filename*/) {

@@ -37,7 +37,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
     {
         Vertex* newvert = new Vertex(0,0);
         QString newvertid;
-        newvertid.setNum(m_dom->childNodes().length());
+        newvertid.setNum(m_dom->verts().count()+1);
         newvert->setId(newvert->id()+newvertid);
         CmdAddVert* cmdadd = new CmdAddVert(newvert,m_scn);
         cmdadd->Do();
@@ -70,12 +70,8 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
             if (m_currVert != m_prevVert) {
                 Arrow * newarr = new Arrow(m_prevVert,m_currVert);
-                switch (m_prevVert->type())
-                {
-
-                }
                 QString newarrid;
-                newarrid.setNum(random());
+                newarrid.setNum(m_dom->arrows().count()+1);
                 newarr->setId(newarr->id()+newarrid);
                 CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
                 cmd->Do();

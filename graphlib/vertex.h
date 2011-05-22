@@ -9,7 +9,7 @@
 class Vertex : public QGraphicsEllipseItem
 {
 public:
-    enum VertType{
+    enum {
         VTPort = 0,
         VTMethod = 1,
         VTState = 2
@@ -28,7 +28,7 @@ public:
     QString next() {
         return m_next;
     };
-    VertType     vtype() {
+    int     vtype() {
         return m_type;
     };
     int     send_or_recv() {
@@ -41,14 +41,13 @@ public:
     void setRem(QString rem);
     void setText(QString text);
     void setNext(QString next);
-    void setType(VertType vtype);
+    void setType(int vtype);
     void setSendOrRecv(int send_or_recv);
     void setRepCount(int repCount);
 
 private:
     QString m_id,m_rem,m_text,m_next;
-    int m_send_or_recv,m_repcount;
-    VertType m_type;
+    int m_type,m_send_or_recv,m_repcount;
     QGraphicsTextItem* m_graphText;
     QGraphicsScene* m_scn;
 protected:

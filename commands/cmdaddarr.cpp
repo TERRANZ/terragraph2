@@ -1,6 +1,6 @@
 #include "cmdaddarr.h"
 
-CmdAddArr::CmdAddArr(Arrow *a,GraphicScene *scn)
+CmdAddArr::CmdAddArr(Arrow *a, GraphicScene *scn)
 {
     m_arr = a;
     m_scn = scn;
