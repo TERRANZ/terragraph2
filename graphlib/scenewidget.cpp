@@ -39,6 +39,10 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         QString newvertid;
         newvertid.setNum(m_dom->verts().count()+1);
         newvert->setId(newvert->id()+newvertid);
+        if (m_dom->type() == Dom::DTProcess)
+        {
+            newvert->setVType(Vertex::VTMethod);
+        }
         CmdAddVert* cmdadd = new CmdAddVert(newvert,m_scn);
         cmdadd->Do();
         m_dom->addVert(newvert);
@@ -50,7 +54,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         emit logSignal("Set Pos\n");
         m_mode = SWModeIdle;
     }
-    break;
+        break;
     case SWModeAddArrowP1:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -62,7 +66,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             emit logSignal("Adding arrow, selected first item\n");
         }
     }
-    break;
+        break;
     case SWModeAddArrowP2:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -70,6 +74,17 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
             if (m_currVert != m_prevVert) {
                 Arrow * newarr = new Arrow(m_prevVert,m_currVert);
+                switch (m_currVert->type())
+                {
+                case Vertex::VTPort:
+                {
+                    newarr->setArrowType(Arrow::ATSend);
+                }break;
+                case Vertex::VTMethod:
+                {
+                    newarr->setArrowType(Arrow::ATMessage);
+                }
+                }
                 QString newarrid;
                 newarrid.setNum(random());
                 newarr->setId(newarr->id()+newarrid);
@@ -87,7 +102,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             }
         }
     }
-    break;
+        break;
     default:
         break;
     }
@@ -104,9 +119,9 @@ void SceneWidget::resizeEvent (QResizeEvent * event)
     QWidget::resizeEvent(event);
 }
 
-void SceneWidget::setVertexParams(QString id, QString rem, QString text)
+void SceneWidget::setVertexParams(QString id, QString rem, QString text,Vertex::VertType vtype)
 {
-    CmdVertSetInfo *cmd = new CmdVertSetInfo(currVert(),id,rem,text);
+    CmdVertSetInfo *cmd = new CmdVertSetInfo(currVert(),id,rem,text,vtype);
     cmd->Do();
     l_commands.append(cmd);
     emit logSignal("Setting info to vertex\n");

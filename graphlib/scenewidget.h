@@ -46,7 +46,7 @@ public:
         return m_dom;
     }
 
-    void setVertexParams(QString id, QString rem, QString text);
+    void setVertexParams(QString id, QString rem, QString text,Vertex::VertType vtype);
 signals:
     void logSignal(QString msg);
     void contextMenuSignal(QPointF pos);

@@ -93,8 +93,8 @@ void MainWindow::vertMenuInfo()
     {
         vertattrdlg = new VertAttrsDlg(this);
         vertattrdlg->load(m_currSceneWidget->currVert());
-        connect(vertattrdlg,SIGNAL(signalOk(QString,QString,QString)),
-                this,SLOT(vertAttrSignalOk(QString,QString,QString)));
+        connect(vertattrdlg,SIGNAL(signalOk(QString,QString,QString,Vertex::VertType)),
+                this,SLOT(vertAttrSignalOk(QString,QString,QString,Vertex::VertType)));
         vertattrdlg->show();
     }
 }
@@ -104,9 +104,9 @@ void MainWindow::vertMenuDelete()
 
 }
 
-void MainWindow::vertAttrSignalOk(QString id, QString rem, QString text)
+void MainWindow::vertAttrSignalOk(QString id, QString rem, QString text,Vertex::VertType vtype)
 {
-    m_currSceneWidget->setVertexParams(id,rem,text);
+    m_currSceneWidget->setVertexParams(id,rem,text,vtype);
 }
 
 void MainWindow::on_tabWidget_currentChanged(int index)

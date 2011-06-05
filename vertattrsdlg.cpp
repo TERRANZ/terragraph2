@@ -32,9 +32,38 @@ void VertAttrsDlg::load(Vertex *v)
     ui->le_rem->setText(v->rem());
     ui->le_chan->setText(v->text());
     ui->spCount->setValue(v->repCount());
+    switch (v->vtype())
+    {
+    case Vertex::VTMethod:
+    {
+        ui->rbMethod->setChecked(true);
+    }break;
+    case Vertex::VTPort:
+    {
+        ui->rbPort->setChecked(true);
+    }break;
+    case Vertex::VTState:
+    {
+        ui->rbState->setChecked(true);
+    }break;
+    }
 }
 
 void VertAttrsDlg::on_btnSave_clicked()
 {
-    emit signalOk(ui->le_name->text(),ui->le_rem->text(),ui->le_chan->text());
+    Vertex::VertType t;
+    if (ui->rbMethod->isChecked())
+    {
+        t = Vertex::VTMethod;
+    }else
+    {
+        if (ui->rbPort->isChecked())
+        {
+            t = Vertex::VTPort;
+        }else
+        {
+            t = Vertex::VTState;
+        }
+    }
+    emit signalOk(ui->le_name->text(),ui->le_rem->text(),ui->le_chan->text(),t);
 }

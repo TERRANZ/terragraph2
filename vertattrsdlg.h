@@ -16,7 +16,7 @@ public:
     void load(Vertex *v);
 
 signals:
-    void signalOk(QString id, QString rem, QString text);
+    void signalOk(QString id, QString rem, QString text,Vertex::VertType vtype);
 
 protected:
     void changeEvent(QEvent *e);

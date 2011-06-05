@@ -44,7 +44,7 @@ private slots:
 
     void vertMenuInfo();
     void vertMenuDelete();
-    void vertAttrSignalOk(QString id, QString rem, QString text);
+    void vertAttrSignalOk(QString id, QString rem, QString text,Vertex::VertType vtype);
     void on_tabWidget_currentChanged(int index);
     void logSlot(QString logstr);
     void sceneContextMenuSignal(QPointF pos);

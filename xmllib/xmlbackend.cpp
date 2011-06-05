@@ -53,11 +53,81 @@ int XmlBackEnd::SaveTo(QString &filename,const QList<Dom*> dl)
                     }
                 }
             }
-
-
         } break;
         case Dom::DTProcess:
         {
+            QDomElement modulechannel = xmldocroot.createElement("process");
+            modulechannel.setAttribute("id","");
+            modulechannel.setAttribute("entry","");
+            modulechannel.setAttribute("templet","");
+            modulechannel.setAttribute("rem","");
+            module.appendChild(modulechannel);
+            foreach (Vertex *v,d->verts())
+            {
+                QDomElement processnode;
+                switch (v->vtype())
+                {
+                case Vertex::VTPort:
+                {
+                    processnode = xmldocroot.createElement("port");
+                    processnode.setAttribute("type",v->send_or_recv());
+                }break;
+                case Vertex::VTMethod:
+                {
+                    processnode = xmldocroot.createElement("method");
+                    processnode.setAttribute("count",v->repCount());
+                }break;
+                default:
+                {
+                    processnode = xmldocroot.createElement("unk");
+                }
+                }
+                processnode.setAttribute("id",v->id());
+                processnode.setAttribute("x",v->pos().x());
+                processnode.setAttribute("y",v->pos().y());
+                processnode.setAttribute("rem",v->rem());
+                modulechannel.appendChild(processnode);
+                foreach (Arrow *a,d->arrows())
+                {
+                    if (a->startitem() == v) {
+                        QDomElement itemArrow;
+                        switch (a->arrowType())
+                        {
+                        case Arrow::ATCondition:
+                        {
+                            itemArrow = xmldocroot.createElement("condition");
+                            itemArrow.setAttribute("method",a->stopitem()->id());
+                        }break;
+                        case Arrow::ATActivate:
+                        {
+                            itemArrow = xmldocroot.createElement("activate");
+                            itemArrow.setAttribute("method",a->stopitem()->id());
+                        }break;
+                        case Arrow::ATSend:
+                        {
+                            itemArrow = xmldocroot.createElement("send");
+                            itemArrow.setAttribute("port",a->stopitem()->id());
+                        }break;
+                        case Arrow::ATReceive:
+                        {
+                            itemArrow = xmldocroot.createElement("receive");
+                            itemArrow.setAttribute("method",a->stopitem()->id());
+                        }break;
+                        default:
+                        {
+                            itemArrow = xmldocroot.createElement("unk");
+                            itemArrow.setAttribute("next",a->stopitem()->id());
+                        }
+                        }
+                        itemArrow.setAttribute("id",a->id());
+                        itemArrow.setAttribute("x",a->breakX());
+                        itemArrow.setAttribute("y",a->breakY());
+                        itemArrow.setAttribute("rem",a->rem());
+                        processnode.appendChild(itemArrow);
+                    }
+                }
+            }
+
         } break;
         }
     }

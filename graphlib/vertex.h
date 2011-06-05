@@ -41,7 +41,7 @@ public:
     void setRem(QString rem);
     void setText(QString text);
     void setNext(QString next);
-    void setType(VertType vtype);
+    void setVType(VertType vtype);
     void setSendOrRecv(int send_or_recv);
     void setRepCount(int repCount);
 
