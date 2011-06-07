@@ -71,10 +71,12 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
     {
         if (m_scn->selectedItems().count() == 1)
         {
+            try
+            {
             m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
             if (m_currVert != m_prevVert) {
                 Arrow * newarr = new Arrow(m_prevVert,m_currVert);
-                switch (m_currVert->type())
+                switch (m_currVert->vtype())
                 {
                 case Vertex::VTPort:
                 {
@@ -82,7 +84,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
                 }break;
                 case Vertex::VTMethod:
                 {
-                    newarr->setArrowType(Arrow::ATMessage);
+                    newarr->setArrowType(Arrow::ATActivate);
                 }
                 }
                 QString newarrid;
@@ -99,6 +101,10 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             } else
             {
                 emit logSignal("First and second item is equal, please select another\n");
+            }
+            }catch (int a)
+            {
+
             }
         }
     }

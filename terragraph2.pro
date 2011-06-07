@@ -41,7 +41,8 @@ HEADERS += mainwindow.h \
     graphlib/graphicscene.h \
     commands/cmdvertsetinfo.h \
     commands/cmdarrsetinfo.h \
-    graphlib/scenewidget.h
+    graphlib/scenewidget.h \
+    exception.h
 FORMS += mainwindow.ui \
     vertattrsdlg.ui
 RESOURCES += icons.qrc
