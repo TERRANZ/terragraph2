@@ -9,11 +9,10 @@
 class Vertex : public QGraphicsEllipseItem
 {
 public:
-    enum VertType{
-        VTPort = 0,
-        VTMethod = 1,
-        VTState = 2
-    };
+    typedef int VertType;
+    static const int VTPort = 0;
+    static const int VTMethod = 1;
+    static const int VTState = 2;
     Vertex(QGraphicsItem *parent,QGraphicsScene *scn);
 
     QString id() {
@@ -28,13 +27,13 @@ public:
     QString next() {
         return m_next;
     };
-    VertType     vtype() {
+    VertType vtype() {
         return m_type;
     };
-    int     send_or_recv() {
+    int send_or_recv() {
         return m_send_or_recv;
     };
-    int     repCount() {
+    int repCount() {
         return m_repcount;
     };
     void setId(QString id);

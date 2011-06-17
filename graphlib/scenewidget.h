@@ -16,6 +16,7 @@
 #include "commands/cmddelvert.h"
 #include "commands/cmdvertsetpos.h"
 #include "commands/cmdvertsetinfo.h"
+#include "exception.h"
 
 class SceneWidget : public QWidget
 {

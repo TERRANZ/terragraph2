@@ -10,6 +10,7 @@ CmdVertSetInfo::CmdVertSetInfo(Vertex *v,QString id,QString rem, QString text,Ve
     m_id = id;
     m_rem = rem;
     m_text = text;
+    m_vtype = vtype;
     setCmd(CMD_VERT_SET_INFO);
 }
 

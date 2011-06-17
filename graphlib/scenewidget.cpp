@@ -73,38 +73,38 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         {
             try
             {
-            m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
-            if (m_currVert != m_prevVert) {
-                Arrow * newarr = new Arrow(m_prevVert,m_currVert);
-                switch (m_currVert->vtype())
+                m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
+                if (m_currVert != m_prevVert) {
+                    Arrow * newarr = new Arrow(m_prevVert,m_currVert);
+                    switch (m_currVert->vtype())
+                    {
+                    case Vertex::VTPort:
+                    {
+                        newarr->setArrowType(Arrow::ATSend);
+                    }break;
+                    case Vertex::VTMethod:
+                    {
+                        newarr->setArrowType(Arrow::ATActivate);
+                    }
+                    }
+                    QString newarrid;
+                    newarrid.setNum(random());
+                    newarr->setId(newarr->id()+newarrid);
+                    CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
+                    cmd->Do();
+                    emit logSignal("Arrow added\n");
+                    m_dom->addArr(newarr);
+                    l_commands.append(cmd);
+                    m_mode = SWModeIdle;
+                    m_prevVert->setOpacity(1);
+                    emit logSignal("Adding arrow, selected second item\n");
+                } else
                 {
-                case Vertex::VTPort:
-                {
-                    newarr->setArrowType(Arrow::ATSend);
-                }break;
-                case Vertex::VTMethod:
-                {
-                    newarr->setArrowType(Arrow::ATActivate);
+                    emit logSignal("First and second item is equal, please select another\n");
                 }
-                }
-                QString newarrid;
-                newarrid.setNum(random());
-                newarr->setId(newarr->id()+newarrid);
-                CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
-                cmd->Do();
-                emit logSignal("Arrow added\n");
-                m_dom->addArr(newarr);
-                l_commands.append(cmd);
-                m_mode = SWModeIdle;
-                m_prevVert->setOpacity(1);
-                emit logSignal("Adding arrow, selected second item\n");
-            } else
-            {
-                emit logSignal("First and second item is equal, please select another\n");
-            }
             }catch (int a)
             {
-
+                throw new Exception("Exception while adding arrow, step2");
             }
         }
     }
