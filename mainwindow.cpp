@@ -138,3 +138,12 @@ void MainWindow::sceneContextMenuSignal(QPointF pos)
 {
     m_vertMenu->exec(QPoint(round(pos.x()),round(pos.y())));
 }
+
+void MainWindow::Undo()
+{
+    m_currSceneWidget->undo();
+}
+void MainWindow::Redo()
+{
+
+}

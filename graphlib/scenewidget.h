@@ -33,21 +33,23 @@ public:
     };
     void setMode(SceneMode m) {
         m_mode = m;
-    };
+    }
     SceneMode mode() {
         return m_mode;
-    };
+    }
     QGraphicsView* view() {
         return m_view;
-    };
+    }
     Vertex* currVert() {
         return m_currVert;
-    };
+    }
     Dom* dom(){
         return m_dom;
     }
 
     void setVertexParams(QString id, QString rem, QString text,Vertex::VertType vtype);
+    void undo();
+    void Redo();
 signals:
     void logSignal(QString msg);
     void contextMenuSignal(QPointF pos);

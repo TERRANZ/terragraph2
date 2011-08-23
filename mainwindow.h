@@ -41,6 +41,8 @@ private slots:
     void Del();
     void Exit();
     void SaveAs();
+    void Undo();
+    void Redo();
 
     void vertMenuInfo();
     void vertMenuDelete();

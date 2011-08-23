@@ -155,3 +155,16 @@ void SceneWidget::setVertexParams(QString id, QString rem, QString text,Vertex::
     l_commands.append(cmd);
     emit logSignal("Setting info to vertex\n");
 }
+
+void SceneWidget::undo()
+{
+    Command* prevCmd = l_commands.last();
+    prevCmd->UnDo();
+    l_commands.removeOne(prevCmd);
+    emit logSignal("Undo\n");
+}
+
+void SceneWidget::Redo()
+{
+    emit logSignal("Redo\n");
+}

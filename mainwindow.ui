@@ -63,7 +63,6 @@
     <addaction name="actAddVert"/>
     <addaction name="actAddArr"/>
     <addaction name="actDel"/>
-    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menu_3">
     <property name="title">
@@ -73,7 +72,15 @@
     <addaction name="actAbutUs"/>
     <addaction name="ActAboutQt"/>
    </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>Правка</string>
+    </property>
+    <addaction name="actUndo"/>
+    <addaction name="actRedo"/>
+   </widget>
    <addaction name="menu"/>
+   <addaction name="menu_4"/>
    <addaction name="menu_2"/>
    <addaction name="menu_3"/>
   </widget>
@@ -114,10 +121,16 @@
    <property name="text">
     <string>Открыть...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actSave">
    <property name="text">
     <string>Сохранить</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="ActSaveAs">
@@ -134,10 +147,16 @@
    <property name="text">
     <string>Выход</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
   </action>
   <action name="actAddVert">
    <property name="text">
     <string>Добавить вершину</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
    </property>
   </action>
   <action name="actAddArr">
@@ -153,6 +172,9 @@
    <property name="text">
     <string>Удалить</string>
    </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
   </action>
   <action name="actAbout">
    <property name="text">
@@ -167,6 +189,19 @@
   <action name="ActAboutQt">
    <property name="text">
     <string>О Qt...</string>
+   </property>
+  </action>
+  <action name="actUndo">
+   <property name="text">
+    <string>Отменить</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actRedo">
+   <property name="text">
+    <string>Повторить</string>
    </property>
   </action>
  </widget>
@@ -255,6 +290,38 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actUndo</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>Undo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>281</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actRedo</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>Redo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>281</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>AddVert()</slot>
@@ -265,5 +332,7 @@
   <slot>Exit()</slot>
   <slot>SaveAs()</slot>
   <slot>About()</slot>
+  <slot>Undo()</slot>
+  <slot>Redo()</slot>
  </slots>
 </ui>
