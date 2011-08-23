@@ -33,6 +33,35 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
 {
     switch (m_mode)
     {
+    case SWModeDelVert:
+    {
+        m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());        
+        foreach (Arrow * arr,m_dom->arrows())
+        {
+            if (arr->startitem() == m_currVert || arr->stopitem() == m_currVert)
+            {
+                CmdDelArr *cmdDelArr = new CmdDelArr(arr,m_scn);
+                l_commands.append(cmdDelArr);
+                emit logSignal("Del arr\n");
+                cmdDelArr->Do();
+            }
+        }
+        CmdDelVert* cmddel = new CmdDelVert(m_currVert,m_scn);
+        l_commands.append(cmddel);
+        emit logSignal("Del vert\n");
+        cmddel->Do();
+        m_mode = SWModeIdle;
+    }
+    break;
+    case SWModeDelArrow:
+    {
+        Arrow *m_currArrow = dynamic_cast<Arrow*>(m_scn->selectedItems().first());
+        CmdDelArr *cmdDelArr = new CmdDelArr(m_currArrow,m_scn);
+        l_commands.append(cmdDelArr);
+        emit logSignal("Del arr\n");
+        cmdDelArr->Do();
+    }
+    break;
     case SWModeAddVer:
     {
         Vertex* newvert = new Vertex(0,0);
@@ -54,7 +83,7 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
         emit logSignal("Set Pos\n");
         m_mode = SWModeIdle;
     }
-        break;
+    break;
     case SWModeAddArrowP1:
     {
         if (m_scn->selectedItems().count() == 1)
@@ -66,49 +95,43 @@ void SceneWidget::SceneMouseReleased(QPointF pos)
             emit logSignal("Adding arrow, selected first item\n");
         }
     }
-        break;
+    break;
     case SWModeAddArrowP2:
     {
         if (m_scn->selectedItems().count() == 1)
         {
-            try
-            {
-                m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
-                if (m_currVert != m_prevVert) {
-                    Arrow * newarr = new Arrow(m_prevVert,m_currVert);
-                    switch (m_currVert->vtype())
-                    {
-                    case Vertex::VTPort:
-                    {
-                        newarr->setArrowType(Arrow::ATSend);
-                    }break;
-                    case Vertex::VTMethod:
-                    {
-                        newarr->setArrowType(Arrow::ATActivate);
-                    }
-                    }
-                    QString newarrid;
-                    newarrid.setNum(random());
-                    newarr->setId(newarr->id()+newarrid);
-                    CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
-                    cmd->Do();
-                    emit logSignal("Arrow added\n");
-                    m_dom->addArr(newarr);
-                    l_commands.append(cmd);
-                    m_mode = SWModeIdle;
-                    m_prevVert->setOpacity(1);
-                    emit logSignal("Adding arrow, selected second item\n");
-                } else
+            m_currVert = dynamic_cast<Vertex*>(m_scn->selectedItems().first());
+            if (m_currVert != m_prevVert) {
+                Arrow * newarr = new Arrow(m_prevVert,m_currVert);
+                switch (m_currVert->vtype())
                 {
-                    emit logSignal("First and second item is equal, please select another\n");
+                case Vertex::VTPort:
+                {
+                    newarr->setArrowType(Arrow::ATSend);
+                }break;
+                case Vertex::VTMethod:
+                {
+                    newarr->setArrowType(Arrow::ATActivate);
                 }
-            }catch (int a)
+                }
+                QString newarrid;
+                newarrid.setNum(random());
+                newarr->setId(newarr->id()+newarrid);
+                CmdAddArr *cmd = new CmdAddArr(newarr,m_scn);
+                cmd->Do();
+                emit logSignal("Arrow added\n");
+                m_dom->addArr(newarr);
+                l_commands.append(cmd);
+                m_mode = SWModeIdle;
+                m_prevVert->setOpacity(1);
+                emit logSignal("Adding arrow, selected second item\n");
+            } else
             {
-                throw new Exception("Exception while adding arrow, step2");
+                emit logSignal("First and second item is equal, please select another\n");
             }
         }
     }
-        break;
+    break;
     default:
         break;
     }

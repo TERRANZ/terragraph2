@@ -17,25 +17,25 @@ public:
 
     QString id() {
         return m_id;
-    };
+    }
     QString rem() {
         return m_rem;
-    };
+    }
     QString text() {
         return m_text;
-    };
+    }
     QString next() {
         return m_next;
-    };
+    }
     VertType vtype() {
         return m_type;
-    };
+    }
     int send_or_recv() {
         return m_send_or_recv;
-    };
+    }
     int repCount() {
         return m_repcount;
-    };
+    }
     void setId(QString id);
     void setRem(QString rem);
     void setText(QString text);

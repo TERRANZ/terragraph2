@@ -66,7 +66,7 @@ void MainWindow::AddArr()
 
 void MainWindow::Del()
 {
-
+    m_currSceneWidget->setMode(SceneWidget::SWModeDelVert);
 }
 
 void MainWindow::Exit()

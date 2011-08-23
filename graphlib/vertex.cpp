@@ -5,7 +5,7 @@ Vertex::Vertex(QGraphicsItem *parent,QGraphicsScene *scn)
 {
     m_scn = scn;
     m_graphText = new QGraphicsTextItem(this,m_scn);
-    m_graphText->setPos(0,7);
+    m_graphText->setPos(0,7); 
     setId("this is id");
     setRem("this is rem");
     setText("text");
