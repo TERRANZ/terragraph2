@@ -145,5 +145,5 @@ void MainWindow::Undo()
 }
 void MainWindow::Redo()
 {
-
+    m_currSceneWidget->redo();
 }

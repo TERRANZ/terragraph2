@@ -164,7 +164,7 @@ void SceneWidget::undo()
     emit logSignal("Undo\n");
 }
 
-void SceneWidget::Redo()
+void SceneWidget::redo()
 {
     emit logSignal("Redo\n");
 }

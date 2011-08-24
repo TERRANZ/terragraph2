@@ -49,7 +49,7 @@ public:
 
     void setVertexParams(QString id, QString rem, QString text,Vertex::VertType vtype);
     void undo();
-    void Redo();
+    void redo();
 signals:
     void logSignal(QString msg);
     void contextMenuSignal(QPointF pos);
